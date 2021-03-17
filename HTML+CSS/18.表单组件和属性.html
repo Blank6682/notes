@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表单组件和属性</title>
+</head>
+
+<body>
+    <!-- 1.表单组件:
+            color：颜色
+            email：邮箱
+            tel：电话号码
+            url：网址
+            number：数字
+            range：范围
+            search：搜索
+            date：日期
+            datetime：日期时间
+            datetime-local：本一日期时间
+            year：年份
+            month：月份
+            time：时间
+-->
+    <form action="#">
+        color：颜色<input type="color"><br />
+        email：邮箱<input type="email"><br />
+        tel：电话号码 <input type="tel"><br />
+        url：网址<input type="url"><br />
+        number：数字<input type="number" step="10" min="50" max="100"><br />
+        range：范围<input type="range" value="20"><br />
+        search：搜索<input type="search"><br />
+        date：日期<input type="date"><br />
+        datetime：日期时间<input type="datetim"><br />
+        datetime-local：当前日期时间<input type=" datetime-local"><br />
+        year：年份<input type="year"><br />
+        month：月份<input type="month"><br />
+        time：时间<input type="time"><br />
+        <input type="submit" value="提交"><br />
+    </form>
+    <!-- 2.表单属性:formaction  formenctype   formmethod  form  novalidate
+            常用的提交方式有:get和post两种,它们的区别:
+            1.get是以字节为单位提交,只接受ASCII码,post是以字符为单位提交
+            2.get是明文方式,提交的数据会显示在地址栏中,一般不用来传输一些敏感的数据,因为传输的数据暴露在外面了,而post是暗文方式提交
+            3.get在浏览器中回退是无害的,而post会再次请求数据
+            4.get会被浏览器主动缓存,而post不会,除非收到设置
+            5.get和post在传输字节数上一般没用限制,个别浏览器会有,可以理解为get一般不超过2K,而post一般不超过2M
+         -->
+    <!-- formaction:修改action数据提交的地方 -->
+    <span>formaction:</span>
+    <form action="http://taobao.com">
+        <input type="submit" value="提交到百度" formaction="http://baidu.com">
+    </form>
+    <!-- formenctype:修改表单请求的类型 -->
+    <span>formenctype:</span>
+    <form action="#" enctype="application/x-www-form-urlencoded">
+        <!--application/x-www-form-urlencoded 普通表单提交类型 -->
+        <input type="submit" formenctype="multipart/form-data">
+        <!--multipart/form-data  文件上传的类型 -->
+    </form>
+    <!-- formmethod:修改数据提交的方法 -->
+    <span>formmethod:</span>
+    <form action="#" method="get">
+        <input type="text">
+        <input type="submit" formmethod="post" value="提交">
+    </form>
+    <!-- form:设置表单元素属于哪个表单 -->
+    <span>form:</span>
+    <form action="#" method="GET" id="user-info">
+        <input type="text" placeholder="请输入用户名">
+        <input type="submit" value="登陆">
+    </form>
+    <form action="#" method="GET" id="student-info">
+        <input type="text" placeholder="请输入用户名">
+        <input type="submit" value="登陆">
+    </form>
+    <input type="password" name="password" form="user-info" placeholder="请输入密码"><br>
+    <!-- novalidate:不验证 -->
+    <span>novalidate:</span>
+    <form action="#" method="GET" novalidate>
+        <input type="email" placeholder="请输入邮箱" value="12145">
+        <input type="submit" value="提交">
+    </form>
+    <!-- 3.input属性:
+        autocomplete:自动完成
+        用来帮助用户输入，每一次输入的内容，浏览器是否保存输入的值，以备将来使用。值有：on/off，默认为on。
+        为了保护敏感数据（如用户帐号、密码等），避免本地浏览器对它们不安全存储，一般需要关闭。
+        autofocus:自动获焦
+        step:步长
+        multiple:多选
+        pattern:正则匹配
+        placeholder:输入提示
+        required:必须输入
+    -->
+    <p>input属性:</p>
+    <form action="#" method="get">
+        <input type="text" name="username" autocomplete="off" autofocus required placeholder="">
+        <input type="submit" value="提交">
+    </form>
+</body>
+
+</html>

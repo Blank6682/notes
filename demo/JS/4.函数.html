@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数</title>
+    <script>
+        //1.返回输入值的和，并检测输入的是否是数组
+        // console.log(Sum([1, 2, 3, 4]));
+
+        // // 传入一个数组，余下操作符会把数组当成第一个元素并不会拆开
+        // function Sum(...items) {
+        //     if (items.length === 1 && Array.isArray(items[0]))
+        //         items = [...items[0]]; //使用拆分操作符来拆分第一个数组
+        //     return items.reduce((a, b) => a + b);
+        // }
+
+
+        //2.用对象创建语法来声明一个circle对象，radius属性可读可写，area属性只读
+        // const circle = {
+        //     radius: 1,
+        //     get area() {
+        //         return Math.PI * this.radius * this.radius;
+        //     }
+        // }
+
+        // console.log(circle.area);
+
+
+        // 3.为下列代码添加错误提醒
+        const numbers = [1, 2, 3, 4, 1];
+        try {
+            const count = countOccurrences(numbers, 1);
+            console.log(count);
+        } catch (e) {
+            console.log(e.message);
+        }
+
+
+        function countOccurrences(array, searchElement) {
+            if (!Array.isArray(array))
+                throw new Error('Invalid array.')
+
+            return array.reduce((accumulator, currentValue) => {
+                const occurrences = (currentValue === searchElement) ? 1 : 0;
+                return occurrences + accumulator;
+            }, 0);
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

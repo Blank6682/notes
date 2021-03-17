@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>String</title>
+</head>
+<script>
+    // String类型    
+    let str = 'This is a String.';
+    let str2 = 'Blank saying :';
+    // 模板字符串  可以动态生成数据
+    const message = 'my first message';
+    console.log(`This is ${message } 'Hi' `); //ES6拆分操作符,获取全名
+
+    //属性：length
+    console.log(str.length); //返回字符串的长度
+
+    //方法：
+    console.log(str.charAt(0)); //返回指定索引位置的字符串
+
+    console.log(str.charCodeAt(0)); //返回指定索引位置字符的Unicode编码
+
+    console.log(str.concat(str, str2, ' OK')); //连接字符串
+
+    console.log(str.slice(2, 4)); //返回指定位置之间的字符串
+    console.log(str.substring(2, 4)); //同上
+
+    console.log(str.substr(2, 4)); //返回从指定位置开始的N个字符串
+
+    console.log(str.split(' ')); //将字符串拆分为数组
+
+    console.log(String.fromCharCode(4582)); //从字符编码获取一个字符
+
+    console.log(str.indexOf('j', 6)); //存在 返回第一个索引位置 可以指定第几个索引的  不存在返回-1
+    console.log(str.lastIndexOf('j')); //相反方向检索
+
+
+    console.log(str.toUpperCase()); //转换为大写
+
+    console.log(str.toLowerCase()); //转换为小写
+
+    console.log(str.match('is')); //返回is中的子串或null,返回是数组
+
+    console.log(str.replace('a', 'first')); //用first 替换a
+
+    console.log(str.search('a')); //返回字符串中'a'开始位置
+
+    console.log(String.fromCharCode(65)); //输出值对应的ASCII码
+</script>
+
+<body>
+
+</body>
+
+</html>

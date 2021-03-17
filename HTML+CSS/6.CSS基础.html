@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS基础</title>
+</head>
+
+<body>
+    <!-- CSS字体:
+        font-size:字号      PX 像素      % 相对于父类的
+        font_family:字体    字体中有空格用双引号
+        font-style:样式     normal 默认     italic 斜体     oblique 斜体 
+        color:颜色 
+        text-align:对齐方式  left/center/right
+        font-weight:粗细     bold<bolder 粗    lighter 细    {100-900} 400等同于normal
+        line-height:行高     px 像素   number 字体的倍数
+        text-decoration:文字修饰    none/underline/overline/line-through
+        text-transform:大小写   capitalize 每个单词第一个字母大写 uppercase 大写 lowercase 小写
+        font-variant:变形       small-caps(可以让大写字母变得小一些)
+        text-indent:首行缩进    px 像素    em(基于父级) 字符    rem (基于html)  
+        font复合属性:
+        font:font-style font-variant font-weight font-size/line-height font-family
+            修饰        变形       加粗     行距/行高  字体     属性位置顺序
+            除了字号和字体之外其他都可以省略
+
+        CSS背景:
+        background-color:背景颜色 
+        background-image:背景图片  ulr{绝对/相对地址}
+        background_repeat:背景图像铺排方式  no-repeat 不平铺   repeat-X 仅横向  repeat-y 仅纵向
+        background_attachment:图像滚动位置  scroll  滚动    fixed 固定
+        background_position:图像位置  X  Y {number|px|%|top|center|bottom} 铺平方式:no-repeat
+        背景复合写法
+        background: color image repeat attachment position  
+                    颜色  图片  铺排方式  滚动  位置        复合写法  尽量按着顺序
+
+        基本选择器:      * 当前html所有元素    标签选择器    .class 类选择器   #id  id选择器  
+
+        关系选择器:
+        空格     后代选择
+        >      只选择子元素
+        +      兄弟选择
+
+        属性选择器:
+        [属性名]:       包含指定属性名的元素
+        [属性名=值]:    属性名的值 为 指定值的元素
+        [属性名*=值]:   属性名的值  包含 指定值(字符)的元素
+        [属性名~=值]:   属性名的值 包含 指定值(词汇)的元素
+        [属性名^=值]:   属性名的值以指定值 开头 的元素
+        [属性名$=值]:   属性名的值以指定值 结尾 的元素
+
+        CSS伪类选择器: 专门用来表示元素的特殊状态
+        超链接类
+        a:visited   已访问
+        a:link      未访问
+        a:hover     鼠标悬停状态
+        a:active    用户激活
+        表单类
+        :focus     表单获得焦点时触发样式
+        位置类
+        :first-child    第一个子元素
+        :nth-child(number)    第几个子元素
+        :last_child     最后一个子元素
+        
+        CSS伪元素选择器:  注意与伪类的区别和相同点
+        :before{content:内容;}    :after    :first-letter  :first:line   (单双冒号都可以)
+        ::selection    ::placeholder    ::backdrop   只能是双冒号
+
+    -->
+</body>
+
+</html>

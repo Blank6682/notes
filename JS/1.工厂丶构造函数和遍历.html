@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>工厂丶构造函数和遍历</title>
+    <script>
+        /*函数命名
+        Camel Notation : oneTweThreeFour   (驼峰命名)
+        Pascal Notation : OneTweThreeFour    （帕斯卡命名）一般构造函数使用
+        */
+        //工厂函数
+        let student = createStudent('Blank', 20, 'China');
+
+        function createStudent(name, age, gender) {
+            let obj = new Object();
+            obj.name = name;
+            obj.age = age;
+            obj.gender = gender;
+        }
+
+        //构造函数
+        function Person(name, age, gender) {
+            this.name = name;
+            this.age = age;
+            this.gender = gender;
+        }
+
+        //修改toString方法 
+        Person.prototype.toString = function () {
+            return 'person[name=' + this.name + ',age=' + this.age + ',gender=' + this.gender + ']';
+        }
+        let per1 = new Person('Blank1', 20, 'China');
+
+        console.log(per1.toString());
+
+        let per2 = new Person('Blank2', 21, 'China');
+        let per3 = new Person('Blank3', 22, 'China');
+        let per4 = new Person('Blank4', 23, 'China');
+        let perArr = [per1, per2, per3, per4];
+        console.log(perArr);
+
+        //遍历输出大于21岁的
+
+        // 方法1，for...of     对象
+        // for (const Person of perArr) 
+        //     if (Person.age > 18)
+        //         console.log(Person);
+
+
+        // 方法2，for...in  序号
+        for (const key in perArr)
+            if (perArr[key].age > 21)
+                console.log(perArr[key]);
+
+
+        //方法3，forEach遍历只支持IE8以上的浏览器
+        // perArr.forEach(function (a) {
+        //     console.log(a);
+        // })
+
+        // console.log(per1.__proto__.__proto__.hasOwnProperty('toString'));
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

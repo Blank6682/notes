@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        // 数字也是对象，const声明常量后不能在声明，常量不会阻止修改它所引用的数组
+        const numbers = [3, 4];
+
+        //数组的方法 
+
+        numbers.push(5, 6, 7); //末尾添加元素
+
+        numbers.pop(); //末尾删除元素
+
+        numbers.unshift(0, 1, 2); //开头添加元素
+
+        numbers.shift(); //开头删除元素
+
+        numbers.splice(0, 0, 'a', 'b') //第一个是索引位置  第二个是删除元素数量  之后是在索引位置插入新元素
+
+        console.log(numbers.slice(0, 2)); //截取返回数组指定位置的数据,第一个是开始索引位置  第二个是规定结束的位置
+
+        const connection = numbers.concat('c', 'd'); //数组的连接，不影响原数组
+        // ES6语法拆分操作符
+        // const connection = [...numbers, "c", "d"]
+        console.log(connection);
+
+        const result = numbers.join('-'); //将数组转换为字符串 可以指定连接符(默认",") 不影响原数组
+        console.log(result);
+
+        numbers.reverse(); //颠倒数组的数据
+        console.log(numbers);
+
+
+        //查询类
+        const inquiry = [1, 2, 3, 1, 4]
+
+        console.log(inquiry.indexOf(1, 2)); //返回数组对应的第一个元素的索引位置，没有就返回-1,第二个可以设置开始索引的位置
+        console.log(inquiry.lastIndexOf(1)); //返回数组对应的 最后的元素的索引位置，没有就返回-1
+        console.log(inquiry.includes(1)); //是否含有元素，返回布尔值
+
+        const courses = [{
+                id: 1,
+                name: 'a'
+            },
+            {
+                id: 2,
+                name: 'a'
+            },
+        ]
+
+        console.log(courses.includes({
+            id: 1,
+            name: 'a'
+        })); //因为是对象索引的地址不同，所以会返回false
+        //用find方法可以找到,返回的是对象，返回索引位置可以用findIndex
+        console.log(courses.find(courses => courses.name === 'a'));
+
+
+        // 清空数组的方法
+
+        //方法1，让原数组直接重新指向一个空数组，一个引用的时候使用
+        // numbers = [];
+
+        //方法2，将数组的长度直接清零，多个引用的时候使用，一般使用
+        // numbers.length = 0;
+
+        //方法3，删除数组长度个数的元素
+        // numbers.splice(0, numbers.length);
+
+        // 方法4，循环pop删除
+        // while (numbers.length > 0)
+        //     numbers.pop();
+
+
+
+        // 数组的遍历
+
+        // 方法1，使用for...of
+        // for (const number of numbers)
+        //     console.log(number);
+
+        // 方法2，使用forEach方法,可以增加index序号
+        numbers.forEach((number, index) => console.log(index, number));
+
+        //数组去重练习***注意相邻元素的处理
+        let arr = [1, 2, 4, 3, 3, 1, 3, 5, 1, 2, 4, 11];
+        console.log(arr);
+        for (var i = 0; i < arr.length - 1; i++) {
+            for (var j = i + 1; j < arr.length; j++) {
+                if (arr[i] == arr[j]) {
+                    arr.splice(j, 1);
+                    j--; //处理相邻元素
+                }
+            }
+        }
+
+        console.log(arr);
+
+
+        // 数组的排序，sort方法，升序
+        arr.sort(function (a, b) {
+            //降序 
+            return b - a; //return >0  交换位置 return <= 0  不交换位置
+        }); //对数组进行排序 默认按照Unicode编码  不调用回调函数可能会出错  
+        console.log(arr);
+
+
+        // every()方法,使用指定函数检测数组中的所有元素：返回布尔值
+        // const allPositive = numbers.every(function (value) {
+        //     return value >= 0;
+        // });
+        console.log(numbers.every(value => value >= 0));
+
+        //some()方法,使用指定函数检测数组中的是否存在元素符合条件，返回布尔值
+        console.log(numbers.some(value => value >= 0));
+
+        //filter() 方法创建一个新的数组，新数组中的元素是通过检查指定数组中符合条件的所有元素，返回符合条件的元素
+        console.log(numbers.filter(value => value >= 0));
+
+        //数组的映射，map()方法
+        // const items = numbers.map(n => '<li>' + n + '</li>');
+        // const html = '<ul>' + items.join('') + '</ul>';
+        // console.log(html);
+        //更简洁的代码写法，一行一个方法,
+        const items = numbers
+            .filter(n => n > 0)
+            .map(n => ({
+                value: n
+            })); //注意返回函数中的{}会被认为是代码块,所以用（）包含起来
+        console.log(items);
+
+
+        // 数组的累加减
+        //reduce()方法，第一个是回调函数，第二个是开始索引位置(默认0，可以不写)
+        const sum = numbers.reduce((accumulator, currentValue) => accumulator + currentValue);
+        console.log(sum);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>双飞翼布局</title>
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            min-width: 600px;
+        }
+
+        /* 头部尾部样式 */
+        #head,
+        #foot {
+            border: 1px solid;
+            height: 30px;
+            text-align: center;
+            background-color: slategray;
+        }
+
+        /* 清除浮动 */
+        #content {
+            overflow: hidden;
+        }
+
+        /* 中部三列伪等高布局 */
+        #content .column {
+            padding-bottom: 10000px;
+            margin-bottom: -10000px;
+            height: 100px;
+            text-align: center;
+            float: left;
+        }
+
+        #content .left,
+        #content .right {
+            width: 150px;
+            background-color: antiquewhite;
+        }
+
+        #content .middle {
+            width: 100%;
+            background-color: aqua;
+        }
+
+        #content .left {
+            margin-left: -100%;
+        }
+
+        #content .right {
+            margin-left: -150px;
+        }
+
+        /* 嵌套一个新块 */
+        #content .middle .m_inner {
+            padding: 0 150px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 双飞翼布局: 由三列组成，两端固定，中间自适应。
+        双飞翼布局的优点：
+        （1）兼容性好，兼容所有主流浏览器，包括万恶的IE6。
+        （2）因为在DOM中center_panel在三列结构的最前面，因此可以实现主要内容的优先加载。
+     -->
+    <div id="head">头</div>
+    <div id="content">
+        <div class="column middle">
+            <div class="m_inner">中
+            </div>
+        </div>
+        <div class="column left">左</div>
+        <div class="column right">右</div>
+    </div>
+    <div id="foot">尾</div>
+</body>
+
+</html>

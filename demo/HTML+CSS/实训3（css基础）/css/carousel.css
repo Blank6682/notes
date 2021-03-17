@@ -1,0 +1,89 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style-type: none;
+}
+
+a {
+    list-style-type: none;
+}
+
+.carousel {
+    width: 1000px;
+    height: 600px;
+    margin: 0 auto;
+    background-color: grey;
+    position: relative;
+    /* 相对定位 */
+    overflow: hidden;
+}
+
+.carousel-img {
+    width: 1000px;
+}
+
+.carousel-img li {
+    float: left;
+}
+
+.carousel-img img {
+    width: 1000px;
+    height: 600px;
+}
+
+.prev,
+.next {
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    /* 绝对定位，脱离文档流 */
+    top: 50%;
+    margin-top: -16px;
+}
+
+.prev {
+    background-image: url("../img/prev.jpg");
+    left: 50px;
+}
+
+.next {
+    background-image: url("../img/next.jpg");
+    right: 50px;
+}
+
+.count {
+    width: 1000px;
+    height: 10px;
+    position: absolute;
+    bottom: 25px;
+}
+
+.count ul {
+    width: 60px;
+    height: 10px;
+    margin: 0 auto;
+    /* background-color: #b4cada; */
+
+}
+
+.count ul li {
+    width: 10px;
+    height: 10px;
+    cursor: pointer;
+    /* 将鼠标设置为手型 */
+    background-color: #0097fc;
+    opacity: 0.5;
+    /* 不透明度，取值范围[0~1] */
+    float: left;
+    margin-left: 10px;
+    border-radius: 50%;
+    /* 圆角 */
+}
+
+/* 注意权重问题 */
+.count .active {
+    background-color: #ca2121;
+}

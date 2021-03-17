@@ -1,0 +1,175 @@
+/* 初始化样式 */
+* {
+    padding: 0;
+    margin: 0;
+}
+
+/* 页面样式 */
+body {
+    font-size: 12px;
+    background: url(../img/bg.gif) no-repeat center top;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+/* 设置页面总样式 */
+.container {
+    width: 980px;
+    margin: 0 auto;
+}
+
+.header {
+    padding-bottom: 15px;
+    background: url(../img/main_line.jpg) repeat-x left bottom;
+}
+
+.header a {
+    cursor: pointer;
+}
+
+.mainnav {
+    background: url(../img/main_menu_bg.gif) repeat-x;
+}
+
+.mainnav ul {
+    padding: 10px 0 8px 0;
+    font: 16px bold;
+    margin-left: 30px;
+}
+
+.mainnav ul li {
+    display: inline-block;
+    padding: 0 20px 0 18px;
+    border-right: 1px solid #817a7a;
+}
+
+.mainnav ul li:last-child {
+    border: none;
+}
+
+.mainnav ul li a {
+    color: #fff;
+}
+
+.mainnav ul li a:hover {
+    color: #e2eb6d;
+}
+
+.subnav ul {
+    padding: 10px 0 8px 0;
+    margin-left: 25px;
+}
+
+.subnav ul li {
+    display: inline-block;
+    padding: 0 10px 0 8px;
+    border-right: 1px solid #817a7a;
+}
+
+.subnav ul li:last-child {
+    border: none;
+}
+
+.subnav ul li a {
+    color: #9c9494;
+}
+
+.subnav ul li a:hover {
+    color: #000;
+}
+
+/* 主体 */
+.content {
+    overflow: hidden;
+}
+
+/* 设置侧边栏样式 */
+
+.sidebar {
+    float: left;
+    width: 210px;
+    border: 1px solid #9b9696;
+    border-top: none;
+}
+
+.sidebar ul li {
+    padding: 10px 0 5px 45px;
+    background: url(../img/directory_bg_big.gif) no-repeat;
+}
+
+.sidebar ul li a {
+    color: #000;
+}
+
+.sidebar ul li a:hover {
+    color: red;
+}
+
+/* 设置主体内容样式 */
+.main {
+    width: 720px;
+    float: right;
+    border: 1px solid #cccccc;
+    padding: 0 0 10px 20px;
+}
+
+.main .title {
+    background: url(../img/main_content_bg.jpg);
+    margin-left: -20px;
+    padding: 0;
+}
+
+.main .title h1 {
+    padding: 8px 0 6px 0;
+    margin-left: 50px;
+    font-size: 15px;
+}
+
+.main h2 {
+    font-size: 12px;
+    margin: 20px 0 10px;
+}
+
+.main p {
+    line-height: 1.5rem;
+    margin: 10px 0 10px;
+}
+
+.main li {
+    list-style: decimal;
+    list-style-position: inside;
+    line-height: 1.5rem;
+}
+
+/* 设置尾部样式 */
+.footer {
+    background: url(../img/bottom_bg.gif) repeat-x;
+    margin-top: 10px;
+}
+
+.footer ul {
+    text-align: center;
+    padding: 10px 0;
+}
+
+.footer ul li {
+    display: inline-block;
+    padding-right: 10px;
+    border-right: 1px solid #817a7a;
+    margin-left: 10px;
+}
+
+.footer ul li:last-child {
+    border: none;
+}
+
+.footer ul li a:hover {
+    color: #e4e26b;
+}

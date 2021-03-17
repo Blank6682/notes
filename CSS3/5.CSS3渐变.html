@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS3渐变</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* CSS3颜色函数
+    1）RGBA
+        rgba(r,g,b,a)
+        r:红色        取值范围：0-255/0-100%
+        g:绿色        取值范围：0-255/0-100%
+        b:蓝色        取值范围：0-255/0-100%
+        a:不透明度    取值范围：0-1的一个小数
+    2）HSL
+        hsl(h,s,l)
+        h:色调        取值范围：0-360
+        s:饱和度      取值范围：0-100%
+        l:亮度        取值范围：0-100%
+    3）HSLA
+        hsla(h,s,l,a)
+        h:色调        取值范围：0-360
+        s:饱和度      取值范围：0-100%
+        l:亮度        取值范围：0-100%
+        a:不透明度    取值范围：0-1的一个小数 */
+        /* CSS3渐变主要用来设置背景或制作三维图。 */
+        /* 1）线性渐变
+        background: linear-gradient(方向或角度, 颜色1 百分比, 颜色2 百分比, ...);
+        方向：
+            to left:从右向左渐变
+            to right:从左向右渐变
+            to top:从下向上渐变
+            to bottom:从上向下渐变
+            to top left:从右下角向左上角渐变
+            to top right:从左下角向右上角渐变
+            to bottom left:从右上角向左下角渐变
+            to bottom right:从左上角向右下角渐变
+        角度：
+            比如45度角，应该表示为：45deg
+        颜色取值：
+            1）表示颜色的单词
+            2）16进制颜色
+            3）表示颜色的函数（rgb()/rgba()/hsl()/hsla()...) */
+        div {
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+        }
+
+        .line {
+            /* background: linear-gradient(to bottom right, red, yellow, green); */
+            background: linear-gradient(135deg, red 10%, yellow, green);
+        }
+
+        /*  2）径向渐变(沿半径方向渐变）
+        background: radial-gradient(形状 渐变大小 at 位置,颜色1 百分比, ..., 颜色n 百分比);
+
+        形状：
+            ellipse:椭圆径向渐变（默认）
+            circle:圆径向渐变
+        渐变大小：
+            farthest-corner:渐变的半径长度为从圆心到离圆心最远的角（默认）
+            closest-side:渐变的半径长度为从圆心到离圆心最近的边
+            closest-corner:渐变的半径长度为从圆心到离圆心最近的角
+            farthest-side:渐变的半径长度为从圆心到离圆心最远的边
+        位置：
+            at 圆心橫坐标 圆心纵坐标: 设定圆心的位置在指定的（橫坐标，纵坐标）处 
+            center:设置圆心在中心位置（默认）
+            top:设置圆心在顶部位置   left:左
+            bottom:设置圆心在底部位置  right：右*/
+        .radial {
+            width: 400px;
+            /* background: radial-gradient(red, yellow, green); */
+            /* background: radial-gradient(circle closest-side at 25% 75%, red, yellow, green); */
+            background: radial-gradient(circle farthest-corner at 25% 75%, red, yellow, green);
+        }
+
+        .circle {
+            border: 1px solid transparent;
+            border-radius: 50%;
+            background: radial-gradient(at 40px 40px, #fff, #ccc, #fff);
+        }
+
+        /*  3）文字渐变
+        background-image: 线性渐变或径向渐变;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent; */
+        p {
+            font: 16px "宋体";
+            text-align: center;
+            text-shadow: 0px 1px 1px gray;
+            background: linear-gradient(to bottom right, red, yellow, green);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="line"></div>
+    <div class="radial"></div>
+    <div class="circle"></div>
+    <p>文字渐变测试:CSS3 渐变（gradients）可以让你在两个或多个指定的颜色之间显示平稳的过渡。
+        以前，你必须使用图像来实现这些效果。但是，通过使用 CSS3 渐变（gradients），你可以减少下载的时间和宽带的使用。此外，渐变效果的元素在放大时看起来效果更好，因为渐变（gradient）是由浏览器生成的。
+        CSS3 定义了两种类型的渐变（gradients）：
+        线性渐变（Linear Gradients）- 向下/向上/向左/向右/对角方向
+        径向渐变（Radial Gradients）- 由它们的中心定义
+    </p>
+</body>
+
+</html>

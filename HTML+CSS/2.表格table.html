@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表格table</title>
+</head>
+
+<body>
+    <!-- 表格属性：
+        border 表格边框，默认单位PX                   
+        width  表格宽度，默认单位PX 
+        align  表格对齐方式left（默认）/center/right
+        cellpadding 单元格文本与边框的距离
+        cellspacing  单元格边框间距
+        完整表格的组成：caption（标题） thead(表头)  tbody(表体)  tfoot(表尾)
+     -->
+
+    <!-- emmet语法： table>(tr>th{标题}*3)+tr>td{内容$}*3 -->
+    <table>
+        <tr>
+            <th>标题</th>
+            <th>标题</th>
+            <th>标题</th>
+        </tr>
+        <tr>
+            <td>内容1</td>
+            <td>内容2</td>
+            <td>内容3</td>
+        </tr>
+    </table>
+
+    <!-- 表格中的rowspan(跨行)和colspan（跨列） -->
+    <!-- rowspan -->
+    <table border="1" width="400" align="center">
+        <tr align="center" valign="top">
+            <!-- valign:垂直对齐 top/middle/bottom-->
+            <td rowspan="2">内容01</td>
+            <td>内容02</td>
+            <td rowspan="3">内容03</td>
+        </tr>
+        <tr>
+            <td>内容02</td>
+        </tr>
+        <tr>
+            <td>内容01</td>
+            <td>内容02</td>
+        </tr>
+    </table>
+    <br />
+    <br />
+    <br />
+    <!-- colspan -->
+    <table border="1" width="400" align="center">
+        <tr>
+            <td>内容01</td>
+            <td colspan="2">内容02</td>
+        </tr>
+        <tr>
+            <td>内容01</td>
+            <td>内容02</td>
+            <td>内容03</td>
+        </tr>
+        <tr>
+            <td colspan="3">内容01</td>
+        </tr>
+    </table>
+    <br />
+    <br />
+    <br />
+    <table border="1" width="400" align="center">
+        <tr>
+            <td rowspan="2">内容01</td>
+            <td colspan="2">内容02</td>
+        </tr>
+        <tr>
+            <td>内容02</td>
+            <td>内容03</td>
+        </tr>
+        <tr>
+            <td colspan="3">内容01</td>
+        </tr>
+    </table>
+    <br />
+    <br />
+    <br />
+</body>
+
+</html>

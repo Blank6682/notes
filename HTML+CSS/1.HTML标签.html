@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>淘宝网</title>
+    <link rel="shortcut icon" href="http://img.alicdn.com/tps/i3/T1OjaVFl4dXXa.JOZB-114-114.png" type="image/x-icon">
+</head>
+
+<body>
+    <!-- 单标签有：<br />换行符    <hr />水平线     <img />图片 <input />文本标签    <link />link标签    <mate />元信息标签 -->
+
+    <!-- 块级元素（相当于执行display:block;操作） 
+        独占一行  宽高可控，没有设置宽高则自动占满一行，可包含块级和行级元素
+    行级元素（相当于执行display:inline;操作）
+        和相邻行级元素占同行直至占满，自动掉下一行  宽高不可控 只包含行级元素
+    -->
+
+    <!-- title:提示文字   target：链接的文档在何处显示,默认是——self -->
+    <a href="http://taobao.com" title="淘宝1">淘宝</a>
+    <a href="http://taobao.com" title="淘宝2" target="_blank">淘宝</a>
+    <a href="http://taobao.com" title="淘宝3" target="_self">淘宝</a>
+
+    <!--src:图片的路径  alt:图片加载不成功时显示的内容-->
+    <br />img/
+    <p>一拳超人埼玉老师壁纸</p>
+    <img style="width: 600px;height:400px " src="img/1.jpg" alt="壁纸">
+    <br />
+
+    <!--span和div都是用来布局的，div会单独占一行，span不会-->
+    <div>div1</div>
+    <div>div2</div>b
+    <span>span1</span>
+    <span>span2</span>
+
+    <!-- sub:上标  sup:下标 -->
+    <p>正常显示：x1+x2=y</p>
+    <p>上标：x<sup>1</sup>+x<sup>2</sup>=y</p>
+    <p>下标：x<sub>1</sub>+x<sub>2</sub>=y</p>
+
+    <!-- 0l/ul列表，前 无序 ，后 有序，列表内容都是用的li标签 -->
+    <ul>
+        <li>li1</li>
+        <li>li2</li>
+        <li>li3</li>
+    </ul>
+    <br />
+    <ol>
+        <li>li1</li>
+        <li>li2</li>
+        <li>li3</li>
+    </ol>
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS3文本</title>
+    <style>
+        /* 1.文本阴影（主流浏览器都支持，（IE9以上支持））
+        text-shadow: 水平偏移距离(必) 垂直偏移距离（必） [模糊距离] [阴影的尺寸] [颜色] [inset]; */
+        h1 {
+            text-shadow: 2px 3px 10px #ff0000;
+        }
+
+        p {
+            text-indent: 2rem;
+            width: 11rem;
+            border: 1px solid #000000;
+        }
+
+        /* 2.文本自动换行（主流浏览器都支持）
+             word-wrap: normal|break-word; 长单词/URL地址内部换行 */
+
+        .test1 {
+            word-wrap: break-word;
+        }
+
+        /* 3.单词拆分（主流浏览器都支持）
+             word-break: normal|break-all|keep-all; 
+                        默认    单词内换行  半角空格或连接字符处*/
+        .test2 {
+            word-break: break-all;
+        }
+
+        /* 文本溢出
+            a)单行文本溢出（重要）
+                text-overflow: clip|ellipsis|string;
+                修剪文本  显示省略号代表被修剪的文本   使用指定的字符代表被修剪的文本
+
+                处理文字溢出样式：
+                    width: px/%/em/rem...;
+                    white-space: nowrap;   为允许折行 
+                    -ms-text-overflow: ellipsis;   处理IE兼容 
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+            b)多行文本溢出（IE9以下的版本不支持，主要是谷歌支持）
+                width: px/%/em/rem...;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 行数;
+                overflow: hidden; */
+        .test3 {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .test4 {
+            word-break: break-all;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>文本阴影测试</h1>
+    <span>文本自动换行:</span>
+    <p class="test1"> 在英文文本文件中，ASCIIASCIIASCIIASCIIASCIIASCII字符集是最为常见的格式，而且在许多场合，它也是默认的格式。对于带重音符号的和其它的非ASCII字符
+    </p>
+    <p class="test2">
+        在英文文本文件中，ASCIIASCIIASCIIASCIIASCIIASCII字符集是最为常见的格式，而且在许多场合，它也是默认的格式。对于带重音符号的和其它的非ASCII字符
+    </p>
+    <span>文本溢出：</span>
+    <p class="test3">
+        在英文文本文件中，ASCIIASCIIASCIIASCIIASCIIASCII字符集是最为常见的格式，而且在许多场合，它也是默认的格式。对于带重音符号的和其它的非ASCII字符
+    </p>
+    <p class="test4">
+        在英文文本文件中，ASCIIASCIIASCIIASCIIASCIIASCII字符集是最为常见的格式，而且在许多场合，它也是默认的格式。对于带重音符号的和其它的非ASCII字符
+    </p>
+</body>
+
+</html>

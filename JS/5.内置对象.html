@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>内置对象</title>
+    <script>
+        //1.global对象，在JS中没有global对象，Web浏览器将Global作为window对象的一部分加以实现。
+        //包含一些属性：undefined，NAN，Object,Array,Function等
+        //有一些以下方法
+        let str = 'This is a first String.这是一个字符串。';
+        console.log(str);
+
+        //a：encodeURIComponent():对unicode进行编码处理，主要是对一些空格，符号，汉字等进行编码
+        console.log(encodeURIComponent(str));
+
+        //b:decodeURIComponent():对unicode编码进行解码处理
+        console.log(decodeURIComponent(encodeURIComponent(str)));
+
+        // c:eval(''):具有字符串解析器的作用（慎用！因为它的性能较差，且比较危险），自带一对引号，中间包含的是一段JS代码
+
+
+        //2.Math对象，提供大量的数学运算和方法，常用 属性：Math.E(底数e)   Math.PI(Π)
+        let numbers = [2, 3, 5, 6, 7, 8, 12];
+
+        console.log('The min number :', Math.min(...numbers)); //取最小值
+        console.log('The max number :', Math.max(...numbers)); //取最大值
+
+
+        console.log(Math.round(23.454215).toFixed(2));
+        //四舍五入，可以保留小数位，但是结果为字符型
+        console.log(typeof Math.round(23.454215).toFixed(2));
+        console.log(Math.ceil(23.2)); //向上取整（取大于或等于操作数的最小整数）
+        console.log(Math.floor(23.5)); //向下取整（取小于或等于操作数的最大整数）
+
+        console.log(Math.random()); //产生[0,1)之间的一个任意小数
+
+        console.log(Math.abs(-8)); //返回number绝对值
+
+        console.log(Math.exp(2)); //返回Math.E的number次幂
+        console.log(Math.log(Math.E)); //返回number的自然对数
+        console.log(Math.pow(2, 4)); //Math.pow(n,power),返回number的power次幂
+        console.log(Math.sqrt(4)); //返回number的平方根
+
+        //在JS运算中必须先将角度转换为弧度在运算
+        console.log(Math.cos(30 * Math.PI / 180)); //返回x的余弦值
+        console.log(Math.round(Math.sin(30 * Math.PI / 180) * 10) / 10); //返回x的正弦值
+        console.log(Math.tan(30 * Math.PI / 180)); //返回x的正切值 
+        console.log(Math.acos(30 * Math.PI / 180)); //返回x的反余弦值
+        console.log(Math.asin(30 * Math.PI / 180)); //返回x的反正弦值
+        console.log(Math.atan(30 * Math.PI / 180)); //返回x的反正切值
+        console.log(Math.atan2(30 * Math.PI / 180, 30 * Math.PI / 180)); //返回y/x的反正切值
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

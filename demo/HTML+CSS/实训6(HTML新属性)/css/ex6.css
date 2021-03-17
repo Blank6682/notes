@@ -1,0 +1,135 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Belgrano, serif;
+  background: url(../img/siteBackground.jpg);
+  font-size: 14px;
+  color: #452200;
+  padding-top: 10px;
+}
+
+img,
+a,
+audio,
+video {
+  border: 0;
+  outline: none;
+}
+
+a {
+  text-decoration: none;
+  color: #900;
+}
+
+li {
+  list-style-type: none;
+}
+
+.container {
+  width: 1100px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+aside {
+  float: left;
+  width: 320px;
+}
+
+/* 侧边栏 */
+/* logo */
+.logo {
+  float: left;
+  width: 206px;
+  height: 205px;
+  background: url(../img/logoBackground.png) no-repeat;
+}
+
+.logo h1 {
+  font-size: 60px;
+  font-family: Lobster, sans-serif;
+  line-height: 60px;
+  padding: 40px 0 0 45px;
+}
+
+.logo h1 a {
+  color: #5a270b;
+  text-shadow: 1px 1px 1px #ffffff;
+}
+
+/* 导航栏nav */
+nav ul {
+  padding-right: 40px;
+  text-align: center;
+}
+
+nav ul li {
+  font: 38px Lobster, sans-serif;
+  text-shadow: 1px 1px 1px #ffffff;
+  padding: 5px 0;
+}
+
+nav ul li a {
+  color: #e4951e;
+}
+
+nav ul li a:hover {
+  color: #5a270b;
+}
+
+nav ul li .active {
+  color: #5a270b;
+}
+
+/* 主体内容main */
+main {
+  width: 750px;
+  float: right;
+}
+main article {
+  float: left;
+  width: 200px;
+  margin: 0 50px 50px 0;
+}
+main h2 {
+  font-family: Lobster, sans-serif;
+  font-size: 30px;
+  color: #cc5616;
+  padding: 10px 0;
+  text-shadow: 1px 1px 2px #ffffff;
+}
+main .title {
+  line-height: 2em;
+}
+main article a h2:hover {
+  color: #910303;
+}
+main p {
+  line-height: 1.5em;
+}
+.date,
+.read-more {
+  font-weight: bold;
+  font-style: italic;
+  font-size: 16px;
+  margin-top: 10px;
+}
+main .date span {
+  color: #e2a351;
+}
+.clear {
+  clear: both;
+}
+/* 页尾 */
+footer {
+  width: 1100px;
+  margin: 30px auto 0;
+  text-align: center;
+  border-top: 1px solid chocolate;
+}
+footer p {
+  padding: 30px 20px;
+}

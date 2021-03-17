@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS3选择器</title>
+    <style>
+        /* 1.属性选择器
+        [属性名]
+        [属性名=属性值]
+        [属性名^=属性值] 以属性值开头的属性
+        [属性名$=属性值] 以属性值结尾的属性
+        [属性名*=属性值]  包含有属性值的属性*/
+        /* 有class的 */
+        /* p[class] { 
+            color: #f00;
+        } */
+        /* class属性值以content开头的 */
+        /* p[class^=content] { 
+            color: #f00;
+        } */
+        /* class属性值包含有P的 */
+        p[class*=p] {
+            color: #f00;
+        }
+
+        /* 2.结构性伪类 */
+        /*  (1):root 匹配html标签，与body标签一样 */
+        :root {
+            background-color: antiquewhite;
+        }
+
+        /* (2). 子元素选择:匹配父元素中连续的子元素
+                :first-child  第一个子元素
+                :last-child     最后一个子元素
+                :nth-child(n)   第n个子元素,找第n个子元素，同类型即找到，如果不是，就没找到，且不再继续查找 
+                :nth-last-child(n)  倒数第n个子元素 */
+        /* 第三个子元素不是p,没找到 */
+        .container p:nth-child(3) {
+            color: #2039a7;
+        }
+
+        p:nth-last-child(3) {
+            color: #0de43b;
+        }
+
+        /* (3) nth-of-type类：用于匹配父元素中兄弟子元素，可以用于子元素非连续的情况
+            :nth-of-type(n)  找第n个同类型标签，跳过不同类型的，继续向下找，直到找到为止
+            :nth-last-of-type(n) */
+        p:nth-of-type(3) {
+            color: #d35cbf;
+        }
+
+        /* (4)其他
+            :only-child    父元素中仅有一个子元素
+            :only-of-type     父元素中仅有一个兄弟元素 
+            :empty          没有元素，包括文本元素，即查找空元素
+        */
+        p:only-child {
+            width: 200px;
+            background-color: aqua;
+        }
+
+        /* p:only-of-type {
+            width: 300px;
+            background-color: blueviolet;
+        } */
+        div:empty {
+            width: 200px;
+            height: 100px;
+            background-color: cornflowerblue;
+        }
+
+        /* 3.目标伪类
+        :target  匹配URL指向的元素*/
+        :target {
+            color: #f01010;
+        }
+
+        /* 4.UI元素(表单元素)状态伪类
+        :checked  (只在Opera浏览器中有效)
+        :disabled
+        :enabled
+        ::selection  (高亮显示被选中的文本)*/
+        input:disabled {
+            background-color: #da1761;
+        }
+
+        input:enabled {
+            background-color: cornflowerblue;
+        }
+
+        ::selection {
+            color: #19bd3c;
+        }
+
+        /*  5.否定伪类 :not() 除了之外
+        */
+        /* :not(p) {
+            background-color: #e0b5d9;
+            color: #8de681;
+        } */
+        /*  6.通用兄弟元素选择器 ~*/
+    </style>
+</head>
+
+<body>
+    <!-- 丰富选择的目的：在标签中减少class和id属性的使用。
+    -->
+    <div class="container">
+        <p class="content p1">段落1</p>
+        <p class="p2 content">段落2</p>
+        <div>div-box</div>
+        <p class="content ">段落3</p>
+        <p class="content ">段落4</p>
+        <p class="content p5">段落5</p>
+        <p>段落</p>
+        <div>
+            <p>仅有一个子元素的段落</p>
+        </div>
+        <div>
+            <p>有两个子元素的段落</p>
+            <div>div-box2</div>
+        </div>
+        <div class="test"></div>
+    </div>
+
+    <a href="#jump">跳转</a>
+    <p id="jump">这是内容(跳转变色)</p>
+
+    <form action="#">
+        <input type="text" disabled><br>
+        <input type="text"><br>
+        <input type="text"><br>
+
+        <input type="checkbox" name="face">党员
+        <input type="checkbox" name="face">团员
+        <input type="checkbox" name="face">群众<br>
+        <select name="" id="">
+            <option value="">大前端开发</option>
+            <option value="">ui设计</option>
+            <option value="">大数据开发</option>
+        </select>
+    </form>
+
+</body>
+
+</html>

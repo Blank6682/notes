@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>运算符练习</title>
+    <script>
+        /* // 返回两个数中大的数
+        console.log(max(100, 50));
+
+        function max(a, b) {
+            return (a > b) ? a : b;
+        }
+        */
+
+        /*//判断练习   判断图片宽高对比，宽>高，返回true
+        console.log(isLandscape(400, 600));
+
+        function isLandscape(width, height) {
+            return (width > height);
+        }*/
+
+        /*// if语句练习   3==>Fizz 5==>Buzz 3和5都能整除FizzBuzz 否则input
+        const output = fizzBuzz(8);
+        console.log(output);
+
+        function fizzBuzz(input) {
+            if ((input % 3 == 0) && (input % 5 == 0))
+                return 'fizzBuzz';
+            if (input % 3 == 0)
+                return 'Fizz';
+            if (input % 5 == 0)
+                return 'Buzz';
+            return input;
+        }*/
+
+        /*// if..else练习 判断车速，70限速，超过70，每5速度扣一分
+        checkSpeed();
+
+        function checkSpeed(speed) {
+            const limitSpeed = 70;
+            const kmPerSpeed = 5;
+            if (speed < limitSpeed) {
+                console.log('OK');
+            } else {
+                const points = Math.floor((speed - limitSpeed) / kmPerSpeed);
+                if (points < 13)
+                    console.log('points:', points);
+                else
+                    console.log('License supended');
+            }
+        }*/
+
+        /*// 三元运算符练习 分辨奇偶
+        showNumber(5);
+
+        function showNumber(limit) {
+            for (let i = 0; i < limit; i++) {
+                const message = (i % 2 == 0) ? 'EVEN' : '0DD';
+                console.log(i, message);
+            }
+        }*/
+
+        /*// for...of练习   统计数组布尔值真多少
+        const array = [0, 2, false, '', 4, 5];
+        console.log(cuntTruthy(array));
+
+        function cuntTruthy(array) {
+            let count = 0;
+            for (const value of array) {
+                if (value)
+                    count++;
+            }
+            return count;
+        }*/
+
+        /*//for...in练习   输出一个对象中所有字符串的属性
+        const movie = {
+            title: '花木兰',
+            releaseYear: 2020,
+            rating: 4.5,
+            Starring: '刘亦菲'
+        };
+        showProperties(movie);
+
+        function showProperties(obj) {
+            for (let key in obj)
+                if (typeof obj[key] === 'string')
+                    console.log(key, obj[key]);
+        }*/
+
+        /*//计算范围内3和我5的倍数数之和
+        console.log(sum(10));
+
+        function sum(limit) {
+            let sum = 0;
+            for (let i = 0; i <= limit; i++) {
+                if (i % 3 == 0 || i % 5 == 0)
+                    sum += i;
+            }
+
+            return sum;
+        }*/
+        /*//工厂函数  统计学生分数等级  
+        const marks = [80, 70, 90]
+        console.log(calculateGrade(marks))
+
+        function calculateGrade(marks) {
+            const average = calculateAverage(marks);
+            if (average < 60) return 'D';
+            if (average < 70) return 'C';
+            if (average < 80) return 'B';
+            if (average < 90) return 'A';
+            if (average < 101) return 'A+';
+        }
+
+        function calculateAverage(average) {
+            let sum = 0;
+            for (let grade of marks) {
+                sum += grade;
+            }
+            return sum / marks.length;
+        }*/
+        /* //嵌套for  实现多行星星
+         showStars(10);
+
+         function showStars(rows) {
+             for (let row = 1; row <= rows; row++) {
+                 let pattern = '';
+                 for (let i = 0; i < row; i++)
+                     pattern += '*'
+                 console.log(pattern);
+             }
+         }*/
+        //质数运算 质数的最优算法，
+        showPrime(100);
+
+        function showPrime(limit) {
+            for (let number = 2; number < limit; number++)
+                if (isPrime(number))
+                    console.log(number);
+        }
+        // 工厂函数 判断是否为质数
+        function isPrime(num) {
+            if (num == 2 || num == 3)
+                return 1;
+            if (num % 6 != 1 && num % 6 != 5)
+                return 0;
+            // 开根号取整
+            let tmp = parseInt(Math.sqrt(num));
+            // 从5开始以6的倍数递增判断，根据质数特点6x+1，6x-1，判断是否为质数
+            for (let i = 5; i <= tmp; i += 6)
+                if (num % i == 0 || num % (i + 2) == 0)
+                    return 0;
+            return 1;
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>图片切换</title>
+    <script>
+        window.onload = function () {
+            let imgArr = ['img/1.jpg', 'img/2.jpg', 'img/3.jpg', 'img/4.jpg', 'img/5.jpg'];
+            let index = 0;
+            //统计图片数据文本提示
+            let setText = function () {
+                document.getElementsByClassName('text')[0].innerHTML = '当前第' + (index + 1) + '张图片，' + '一共' +
+                    imgArr.length + '张图片';
+            };
+            setText();
+            //获取两个按钮
+            let prev = document.getElementById('prev');
+            let next = document.getElementById('next');
+            //上一张绑定单击事件
+            prev.onclick = function () {
+                //上一张图片索引-1
+                index--;
+                if (index < 0) {
+                    index = imgArr.length - 1;
+                }
+                //重新设置图片的scr值
+                document.getElementsByClassName('image')[0].setAttribute('src', imgArr[index]);
+                setText();
+            }
+            //下一张绑定单击事件
+            next.onclick = function () {
+                index++;
+                if (index > imgArr.length - 1) {
+                    index = 0;
+                }
+                document.getElementsByClassName('image')[0].setAttribute('src', imgArr[index]);
+                setText();
+            }
+        }
+    </script>
+    <style type="text/css">
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        button {
+            border-radius: 20%;
+            font-size: 16px;
+            background-color: aqua;
+        }
+
+        #div1 {
+            width: 600px;
+            height: 400px;
+            margin: 50px auto;
+            border: 1px solid;
+            text-align: center;
+            background-color: antiquewhite;
+        }
+
+        #div2 {
+            width: 500px;
+            height: 300px;
+            margin: 10px auto;
+            border: 1px solid;
+            align-content: center;
+            background-color: antiquewhite;
+        }
+
+        .image {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="div1">
+        <p>图片切换</p>
+        <p class="text"></p>
+        <div id="div2">
+            <img class="image" src="img/1.jpg" alt="显示图片">
+        </div>
+        <button id="prev">上一张</button>
+        <button id="next">下一张</button>
+    </div>
+</body>
+
+</html>

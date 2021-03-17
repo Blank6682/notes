@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS3盒模型</title>
+    <style>
+        /* box-sizing
+    允许你以某种方式定义某些元素，以适应指定的区域。
+    box-sizing: content-box/border-box （火狐和谷歌低版本需要厂商前缀） */
+        .container {
+            width: 400px;
+            height: 200px;
+            border: 1px solid #000;
+        }
+
+        .box {
+            width: 200px;
+            height: 200px;
+            float: left;
+            border: 1px solid #f00;
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+
+</body>
+
+</html>

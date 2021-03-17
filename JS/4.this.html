@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>this</title>
+    <script>
+        //this: this引用了执行当前函数的对象实例
+
+        //如果一个函数是对象中的方法的话,this指向就是对象本身,否则,如果这个函数是普通函数,或者说它不是某个对象的一部分this就是指向全局对象,也就是windows/Node当中的global
+
+        // 函数是对象中的方法时,this指向对象本身
+        const video = {
+            title: 'a',
+            paly() {
+                console.log(this);
+            }
+        };
+
+        video.paly();
+
+        // 不是某个对象的一部分的时,this指向windows
+        function playVideo() {
+            console.log(this);
+        }
+
+        playVideo();
+
+        // new,使用new时创建了一个新的空对象,并将构造函数中的this绑定到这个空对象身上,this指向这个新对象{}
+        function Video(title) {
+            this.title = title;
+            console.log(this);
+        }
+
+        const v = new Video('b');
+
+
+        // **普通函数时
+        const movie = {
+            title: 'c',
+            tags: ['a', 'b', 'c'],
+            showTags() {
+                this.tags.forEach(function (tag) {
+                    console.log(this.title, tag);
+                    // videos函数只有一个方法showTags,里面这个函数是普通函数,所以里面的this指向的是windows
+                }, this); //设置内部函数的this的指向,这个this指向的是对象本身
+            }
+        };
+
+        movie.showTags();
+        console.log(' ');
+
+
+        //如何改变一个函数的this指向
+        const film = {
+            title: 'd',
+            tags: ['a', 'b', 'c'],
+            showTags() {
+                // 方法1，使用中继变量，用self来替换this ,尽量避免使用这个，知道就行
+                //const self = this;
+                // this.tags.forEach(function (tag) {
+                //     console.log(self.title, tag);
+                // });
+
+                //方法2，将this绑定到一个新函数，有点繁琐
+                // this.tags.forEach(function (tag) {
+                //     console.log(this.title, tag);
+                // }.bind(this));
+
+                //方法3,ES6的箭头函数，它继承了this的值
+                this.tags.forEach(tag => {
+                    console.log(this.title, tag);
+                });
+            }
+        };
+        film.showTags();
+
+        //方法2,call()方法和apply()方法,传实参的方式不同，call可以直接传，apply要用数组的方式
+        function playFilm(a, b) {
+            console.log(this, a, b);
+        }
+
+        playFilm.call({
+            name: 'Blank'
+        }, 1, 2);
+
+        playFilm.apply({
+            name: 'Blank'
+        }, [1, 2]);
+
+        // bind()方法，它会返回一个新函数，将新函数的this绑定到输入的对象上，它的this永远只会指向这里的这个对像
+        playFilm.bind({
+            name: 'Blank'
+        }, 1, 2)(); //返回函数直接调用
+
+        playFilm();
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

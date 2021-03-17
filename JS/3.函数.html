@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数</title>
+    <script>
+        //var和let：var创建出来的变量是函数作用域的,而let和const创建出来的变量是代码块作用域;当var声明全局变量的时候会把对象添加到windows里面,尽量避免去使用var
+
+        //Arguments
+        // function sum() {
+        //     let total = 0;
+        //     for (let value of arguments) {
+        //         total += value;
+        //     }
+        //     return total;
+        // }
+
+        //余下操作符，注意：多个参数的时候，余下操作符要放在最后
+        function sum(...args) {
+            return args.reduce((a, b) => a + b);
+        }
+
+        console.log(sum(1, 2, 3, 4, 5));
+
+        // 设置默认值，当没有实参是则引用默认值
+        function interest(principal, rate = 3.5, years = 5) {
+            return principal * rate / 100 * years;
+        }
+
+        console.log(interest(10000, 5));
+
+
+        //存取器，getter和setter方法:使用getter来访问对象的属性,用setter来修改他们
+        const person = {
+            firstName: 'Mosh',
+            lastName: 'Hame',
+            //fullName:function(){}  
+            //使用getter来访问对象的属性
+            get fullName() {
+                //es6语法``反引号读取全名
+                return `${person.firstName} ${person.lastName}`;
+            },
+            //用setter来修改他们
+            set fullName(value) {
+                if (typeof value !== 'string')
+                    throw new Error('Value is not a string');
+
+                const parts = value.split(' ');
+                if (parts.length !== 2)
+                    throw new Error('Enter a first and last name.')
+                this.firstName = parts[0];
+                this.lastName = parts[1];
+            }
+        };
+        person.fullName = 'John Smith';
+
+        // 抛出异常,try...catch
+        // try {
+        //     person.fullName = null;
+        // } catch (e) {
+        //     alert(e)
+        // }
+        console.log(person);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

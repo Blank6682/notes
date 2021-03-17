@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基本包装类型</title>
+    <script>
+        //typeof:用来获取数据类型，一般只用来获取基本数据类型的，而引用类型的数据类型是Object
+        //instanceof:用来测试引用类型的实例属于哪一个类；所有的引用类型都属于Object的实例
+        let numbers = [1, 2, 3, 4];
+        console.log(typeof numbers);
+        console.log(numbers instanceof Array);
+
+        //***基本数据类型：
+
+        // 原始类型:String,Number,Boolean,Null,Undefined,Symbol，BigInt 7种和Object
+
+        //特殊的类：String、Number和Boolean。
+        //三个都有自己的包装对象，有相应的属性和方法。调用方法的过程是在后台发生的，所以称为基本包装类型。
+
+        //1.Boolean  没有自己的属性和方法
+
+        //2.Number 
+        //属性：        
+        console.log(Number.EPSILON); //两个可表示数之间的最小间隔。
+
+        console.log(Number.MAX_SAFE_INTEGER); //最大的安全整数 (253 - 1)
+
+        console.log(Number.MIN_SAFE_INTEGER); //最小的安全整数 (-(253 - 1)).
+
+        console.log(Number.MAX_VALUE); //最大正数
+
+        console.log(Number.MIN_VALUE); //最小正数,即最接近 0 的正数 (实际上不会变成 0)
+
+        console.log(Number.NaN); //特殊的“非数字”值。
+
+        console.log(Number.NEGATIVE_INFINITY); //负无穷大值，在溢出时返回该值。
+
+        console.log(Number.POSITIVE_INFINITY); //正无穷大值，在溢出时返回该值。
+
+        console.log(Number.prototype); //Number 对象上允许的额外属性。原型，用于增加新属性和方法
+
+        //方法：主要是Number.prototype中的
+        let number = 23333;
+
+        console.log(number.toString()); //转化为字符串，并且可以转换进制
+
+        console.log(number.toLocaleString()); //根据本地数字格式转换为字符串
+
+        console.log(number.toFixed(2)); //保留小数点后指定位数并转化为字符串
+
+        console.log(number.toExponential(2)); //以指数形式表示，保留小数点后指定位数并转化为字符串
+
+        console.log(number.toPrecision(3)); //指数形式或点形式表述数，保留小数点后面指定位数并转化为字符串
+
+        console.log(number.valueOf()); //显示原始值
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

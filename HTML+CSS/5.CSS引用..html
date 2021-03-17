@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS引用</title>
+    <!-- 导入外部样式 -->
+    <link rel="stylesheet" href="css/test.css">
+    <!-- 内部样式 -->
+    <style type="text/css">
+        /* 导入外部样式 */
+        /* @import "css/test.css"; */
+        p {
+            background-color: #ff00aa !important;
+            color: rgb(252, 248, 1);
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- css引用方式：行间样式  内部样式  外部样式 导入外部样式 -->
+    <!-- 权重优先级:
+        行间>内部>外部
+        !important(10000)>内联(1000)>id选择器(100)>类选择器(10)>标签选择器(1)
+    -->
+    <div style="border: 1;color: #00ff00;width: 100px;font-size: 20px;">行间样式</div>
+
+    <p style="background-color: #00ff00;">内部样式1</p>
+    <!-- 由于前面P加了!important,权重最大 所以显示的是前面的属性 -->
+    <p>内部样式2</p>
+    <p>内部样式3</p>
+
+    <span>外部样式</span>
+    <span>外部样式</span>
+    <span>外部样式</span>
+
+    <div class="box">导入外部样式</div>
+    <div class="box">导入外部样式</div>
+    <div class="box">导入外部样式</div>
+
+</body>
+
+</html>

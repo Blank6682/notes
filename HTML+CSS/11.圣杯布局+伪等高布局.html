@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>圣杯布局+伪等高布局</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-width: 800px;
+        }
+
+        /* 头尾部样式 */
+        #head,
+        #foot {
+            height: 50px;
+            text-align: center;
+            border: 1px solid salmon;
+            background-color: blueviolet;
+
+        }
+
+        #content {
+            padding: 0 200px;
+            overflow: hidden;
+        }
+
+        /* 伪等高布局 */
+        #content .column {
+            text-align: center;
+            padding-bottom: 1000px;
+            margin-bottom: -1000px;
+            position: relative;
+            /* 使用定位来布局两侧 */
+            float: left;
+        }
+
+        /* 圣杯布局 */
+        #content .middle {
+            /* 高度由内容撑开 不需要给高度 */
+            width: 100%;
+            background-color: burlywood;
+        }
+
+        #content .left,
+        #content .right {
+            width: 200px;
+            background-color: aquamarine;
+        }
+
+        #content .left {
+            left: -200px;
+            margin-left: -100%;
+
+        }
+
+        #content .right {
+            right: -200px;
+            margin-left: -200px;
+        }
+
+        /* 清除浮动第二种方法 */
+        /* .clearfix {
+            *zoom: 1;
+        }
+
+        .clearfix:after {
+            content: "";
+            display: block;
+            clear: both;
+        } */
+    </style>
+</head>
+
+<body>
+    <!-- 圣杯布局:  由三列组成，两端固定，中间自适应。外观与双飞翼布局一样。
+        布局时与双飞翼比增加了定位和偏移设置。 -->
+    <div id="head">头</div>
+    <div id="content" class="clearfix">
+        <div class="column middle">
+            中<br />
+            中<br />
+            中<br />
+            中<br />
+            中<br />
+            中<br />
+            中<br />
+        </div>
+        <div class="column left">左</div>
+        <div class="column right">右</div>
+    </div>
+    <div id="foot">尾部</div>
+</body>
+
+</html>

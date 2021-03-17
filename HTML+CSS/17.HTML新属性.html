@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML新属性</title>
+</head>
+
+<body>
+    <!-- 1.contentEditable: 将标签转换为可编辑状态。可用于所有标签。它的值有true/false。 -->
+    <p contenteditable="true">可编辑内容</p>
+    <!-- 2.hidden: 对元素进行隐藏。一般用来传值或当某个条件成立，执行内容显示。默认值为hidden。-->
+    <p hidden>隐藏段落</p>
+    <p>可见段落</p>
+    <!-- 3.data-* :  用于存储页面或应用程序的私有自定义数据。一般用于传值-->
+    <p data-id="001">内容</p>
+    <!-- 4.multiple:  规定输入域中可选择多个内容。用于表单组件中，如file/select。 -->
+    <p>multiple: </p>
+    <select multiple>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+    </select>
+    <!-- 5.required:  约束表单元互在提交前必须输入值。用于表单组件中，需要结合提交按钮使用。 -->
+    <p>required:</p>
+    <form action="#">
+        <input type="text" required placeholder="请输入你的ID"><br>
+        <input type="password" required placeholder="请输入你的密码">
+        <input type="submit" value="提交">
+    </form>
+    <!--  6.pattern:   用于验证输入字段的模式。用于表单组件中，需要结合提交按钮使用。-->
+    <p>pattern: </p>
+    <form action="#">
+        <span>用户名:</span>
+        <input type="text" placeholder="请输入4-6位的大小写字母" pattern="[A-Za-z]{4,6}"><br>
+        <input type="password" placeholder="请输入你的密码">
+        <input type="submit" value="提交">
+    </form>
+</body>
+
+</html>

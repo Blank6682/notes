@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>盒子模型</title>
+</head>
+<style type="text/css">
+    div {
+        width: 600px;
+        margin: 20px auto;
+        border: 1px solid crimson;
+    }
+
+    .content1 {
+        width: 200px;
+        height: 200px;
+        background-color: cyan;
+        margin: 10px 20px 30px 40px;
+        padding: 10px 20px 30px 40px;
+        border: 1px solid gray;
+        display: inline-block;
+    }
+
+    .txt {
+        width: 100px;
+        height: 100px;
+        background-color: #d47e1c;
+    }
+
+    .content2 {
+        width: 100px;
+        height: 100px;
+        background-color: #54a12efb;
+        display: inline-block;
+    }
+
+    /* display设置样式 */
+    .box1,
+    .box2 {
+        display: inline;
+    }
+
+    .box1 {
+        background-color: cyan;
+    }
+
+    .box1+.box2 {
+        background-color: darkorchid;
+    }
+
+    .span {
+        width: 100px;
+        height: 100px;
+        background-color: darksalmon;
+        display: inline-block;
+    }
+
+    /*  table样式*/
+    table,
+    td {
+        border: 1px solid black;
+
+    }
+
+    table {
+        border-collapse: collapse;
+        margin: 0 auto;
+        width: 500px;
+        height: 300px;
+        text-align: center;
+
+    }
+
+    td {
+        vertical-align: top;
+    }
+
+    /* 列表样式 */
+    ul {
+        /* list-style-image: url("img/6.jpg"); */
+        list-style: url("img/6.jpg");
+    }
+
+    ol {
+        list-style-type: lower-roman;
+    }
+
+    dt {
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    dd {
+        margin-left: 1px;
+    }
+</style>
+
+<body>
+    <!-- 盒子模型：每一个元素都是一个盒子
+        组成:margin(外边距),padding(内边距),border(边框线)和content(内容)
+        盒子的真实尺寸：
+        宽度=width+padding左右+border左右
+        高度=height+padding上下+border上下
+    
+        区别外边距和内边距是比边框为参照;
+        系统默认外边距是8px;
+
+        1.margin(外边距):指元素边框线之外的距离
+            margin-left:左
+            margin-right:右
+            margin_top:上
+            margin:bottom:下
+            margin:可用来设置任意一个边的边距,可以带1-4个参数(顺时针)
+            1个(apx):上下左右  apx
+            2个(apx bpx):上下apx ,左右box
+            3个(apx bpx cpx):上apx,下cpx,左右bpx
+            4个(apx bpx cpx dpx):上apx,下Cpx,左dpx,右bpx
+
+        2.padding(内边距):指元素的文本内容与边框之间的距离
+            它的用法鱼margin相同
+
+        3.border(边框):
+        border-width:设置宽度
+        border-style:设置边框的样式
+            none:默认值,无边框
+            solid:定义实线边框
+            double:定义双实线边框
+            dotted:定义点状线边框
+            dashed:定义虚线边框
+        border-color:设置颜色
+        border(width style color)  简写
+     -->
+
+    <div>
+        <div class="content1">
+            <p class="txt">txt</p>
+        </div>
+        <div class="content2">content</div>
+    </div>
+    <!-- display属性:用来设置元素的显示方式
+    属性值:
+        none:不显示元素
+        block:块显示,在元素前后设置换行符,
+             目的:将行级标签转换为块级标签(因为行级标签不识别宽高,而块级标签识别,转换后,行级标签也可以设置宽高了)
+        inline:行内显示,将块级标签转换为行级标签
+        inline-block:将块级/行级标签转换为行内块级标签
+ -->
+    <div class="box1">div1</div>
+    <div class="box2">div2</div>
+    <span class="span">span</span>
+
+    <!-- table样式:一般不用来布局,主要用来格式化数据
+        属性:
+            width:宽度   height:高度    border:边框线
+            border-collapse:collapse; 单线边框
+        tr/td属性:
+            width:宽度  height:高度     border:边框线
+            text-align:文本水平对齐(left/center/right)
+            vertical-align:文本垂直对齐(top/middle(默认)/bottom)
+    -->
+    <table>
+        <tr>
+            <td>实际内容1</td>
+            <td>实际内容2</td>
+            <td>实际内容3</td>
+            <td>实际内容4</td>
+        </tr>
+        <tr>
+            <td>实际内容1</td>
+            <td>实际内容2</td>
+            <td>实际内容3</td>
+            <td>实际内容4</td>
+        </tr>
+        <tr>
+            <td>实际内容1</td>
+            <td>实际内容2</td>
+            <td>实际内容3</td>
+            <td>实际内容4</td>
+        </tr>
+    </table>
+
+    <!-- 列表样式  不是描述性的文本的任何内容都可认为是列表,例如菜单,商品列表
+        1.列表类型:
+            无序(ul),有序(ol)和自定义列表(dl)
+            ul和ol的列表项都是用li表示,而dl是由一个dl或者多个dd组成
+            dl一般用来设定一个定义,比如名词解释等
+            dt:标题,dd:描述,用来对dt的内容进行解释并说明的
+        2.样式(用来修改标识类型)
+            list-style-image:用图像表示标识
+            list-style-position:标识位置(outside(默认值)/inside)
+            list-style-type:标识类型
+            简写:
+            list-style:list-style-image list-style-position list-style-type;
+            list-style的值可以按任意顺序列出,还可以任意省略,只要提供一个值,其他的都是默认值
+
+            list-style-type属性值:
+            a)无序
+                disc(实心圆/默认)/circle(空心圆)/square(实现方块)
+            b)有序
+            decimal(数字)/decimal-leading-zero(0开头的数字)/
+            lower-roman(小写罗马数字)/upper-roman(大写罗马数字)/lower-alpha(小写英文字母)/upper-alpha(大写英文字母)/lower-greek(小写希腊字母)/lower-latin(小写拉丁字母)/upper-latin(大写拉丁字母)
+            无序和有序: none(无标记)
+-->
+    <ul>
+        <li>列表项1</li>
+        <li>列表项2</li>
+        <li>列表项3</li>
+        <li>列表项4</li>
+    </ul>
+    <ol>
+        <li>列表项1</li>
+        <li>列表项2</li>
+        <li>列表项3</li>
+        <li>列表项4</li>
+    </ol>
+    <dl>
+        <dt>欢迎来到喜士多</dt>
+        <dd>我们有快餐</dd>
+        <dd>我们有饮料</dd>
+        <dd>我们有干粮</dd>
+    </dl>
+    <!-- -->
+</body>
+
+</html>

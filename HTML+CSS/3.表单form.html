@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form表单</title>
+</head>
+
+<body>
+    <!-- form常用属性： 
+        name    表单名称
+        action  表单数据提交的地方（通常是一个后台文件（.jsp/.php/.asp/.aspx/.py等），或网址）如果是#，表示提交到当前文件下。
+        method  前端提交数据到后端的方法，主要有get(默认)和post。
+    -->
+    <!-- 表单元素：
+        1）input类：主要用来输入，选择或发出指令。
+        type:text/password/radio/checkbox/file/button/image/submit/reset
+
+    -->
+    <form action="#" method="get">
+
+        <!-- text文本框  type="text"可以不写,默认值
+            属性：placeholder(提示文字)/name(命名)/minlength/maxlength/disabled(失效) /readonly(只读)/value(默认值)/pattern(正则匹配)-->
+        <p>文本框：</p>
+        <input type="text" name="userName" placeholder="请输入你的姓名(disabled)" disabled><br />
+        <input type="text" name="userName" placeholder="请输入你的姓名（readonly）" readonly><br />
+        <input type="text" name="userName" placeholder="请输入你的姓名" minlength="1" maxlength="6"><br /> <br />
+
+        <!-- password密码框 属性和text一样 -->
+        <p>密码框：</p>
+        <input type="password" name="" id=""><br /><br />
+
+        <!-- button普通按钮  通常用它去调用脚本代码
+            常用属性：value(按钮标题)/disabled-->
+        普通按钮：<br />
+        <input type="button" value="确认"><br /><br />
+
+        <!--radio单选钮   
+            常用属性：name（必须要有）/value/checked(选中)/disabled(失效) /readonly(只读)-->
+        单选钮：<br />
+        <input type="radio" name="sex" checked>男
+        <input type="radio" name="sex">女<br /><br />
+
+        <!-- checkbox复选框  
+            常用属性：name（必须要有）/value/checked(默认选中)/disabled(失效) /readonly(只读)-->
+        复选钮：<br />
+        <input type="checkbox" name="num" id="" checked>1
+        <input type="checkbox" name="num" id="">2
+        <input type="checkbox" name="num" id="" checked>3<br /><br />
+
+        <!-- file文件上传按钮 -->
+        文件上传按钮：<br />
+        <input type="file" name="" id=""><br /><br />
+
+        <!-- submit提交按钮，用来将表单数据提交到后台 -->
+        提交按钮：<br />
+        <input type="submit" value="提交"><br /><br />
+
+        <!-- image图片按钮 用法和button一样，也有提交功能与submit一样
+            属性src:用来加载提示图片，替换了value  alt:图像的替代文本-->
+        图片按钮：<br />
+        <input type="image" src="img/2.jpg" alt="播放"><br /><br />
+
+        <!-- reset重置按钮  将表单内容清空，还原到初始状态-->
+        重置按钮：<br />
+        <input type="reset" value="重置"><br /><br />
+
+    </form>
+
+    <!-- 2.textarea文本域：主要用来输入大批量的内容
+        常用属性：name/ id/ cols(列)/ rows（行）/ placeholder/ minlength/  maxlength/ required(必须要输入)/value
+    -->
+    <form action="">
+        文本域：<br />
+        <textarea name="memo" id="" cols="30" rows="10" placeholder="留言："></textarea><br /><br />
+    </form>
+
+    <!-- select类  下拉列表框,默认单项选择,用option显示每个选项
+        multiple(多选,下拉列表变成了列表框) size(显示行数)-->
+    <form action="">
+        <label for="sex">性别:</label>
+        <select id="sex">
+            <option value="male">男</option>
+            <option value="female">女</option>
+        </select>
+        <br />
+        <label for="course">选课:</label>
+        <select id="course" multiple size="3">course
+            <option value="语文">语文</option>
+            <option value="数学">数学</option>
+            <option value="英语">英语</option>
+            <option value="其他">其他</option>
+        </select>
+    </form>
+
+    <!-- button 普通按钮 可以单独使用, 如果写在form中有提交功能 -->
+    <br />
+    <button id="btn0">确认</button>
+    <!-- 主要用来调用 -->
+    <br />
+    <form action="http://taobao.com">
+        <button>转到淘宝</button>
+        <!-- 与form中的submit相同 -->
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Function和Object练习</title>
+    <script>
+        /*// 创建对象输出对象中的属性和对应的值
+        const address = {
+            street: 'hong',
+            city: 'guangzhou',
+            zipCode: '520000'
+        }
+        showAddress(address);
+
+        function showAddress(address) {
+            for (let key in address) {
+                console.log(key, address[key]);
+            }
+        }*/
+        /*// 用工厂函数和构造函数创建对象
+        const address = new createAddress('a', 'b', 'c');
+
+        console.log(address);
+        //工厂函数
+        // function createAddress(street, city, zipCode) {
+        //     return {
+        //         //对象的键和值同名可以省略
+        //         street,
+        //         city,
+        //         zipCode
+        //     };
+        // }
+        // 构造函数
+        function createAddress(street, city, zipCode) {
+            this.street = street;
+            this.city = city;
+            this.zipCode = zipCode;
+        }
+
+        let address1 = new createAddress('a', 'b', 'c');
+        let address2 = new createAddress('a', 'b', 'c');
+
+        console.log(areEqual(address1, address2));
+        console.log(areSame(address1, address2));
+        // 判断对象是否相等
+        function areEqual(address1, address2) {
+
+            return address1.street === address2.street &&
+                address1.city === address2.city &&
+                address1.zipCode === address2.zipCode;
+        }
+        // 判断是否全等
+        function areSame(address1, address2) {
+            return address === address1;
+        }*/
+        // 创建一个博客对象
+        let post = {
+            title: 'a',
+            body: 'b',
+            author: 'c',
+            views: 22,
+            comments: [{
+                author: 'a',
+                body: 'b'
+            }, {
+                author: 'a',
+                body: 'b'
+            }],
+            isLive: 'true'
+        };
+        console.log(post);
+        // 创建一个价格区域的对象
+        // 商品属性
+        let priceRanges = [{
+            label: '$',
+            tooltip: 'Inexpensive',
+            minPerPerson: 0,
+            maxPerPerson: 10
+        }, {
+            label: '$$',
+            tooltip: 'Moderate',
+            minPerPerson: 10,
+            maxPerPerson: 20
+        }, {
+            label: '$$$',
+            tooltip: 'Expensive',
+            minPerPerson: 20,
+            maxPerPerson: 30
+        }]
+        // 餐厅的属性,人均消费
+        let restaurants = [{
+            averagePerPerson: 5
+        }]
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

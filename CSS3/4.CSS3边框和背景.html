@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS3边框和背景</title>
+    <style>
+        /* CSS3边框
+    1）圆角边框（掌握）
+         border-radius: 1-4 length|% / 1-4 length|%;
+         四个方位的词：top-left/top-right/bottom-left/bottom-right
+
+    2）边框阴影（IE9以上支持）
+        box-shadow:h-shadow v-shadow  blur spread  color inset
+            水平偏移距离 垂直偏移距离 [模糊距离] [阴影的尺寸] [颜色] [inset(内部显示，默认是外部)];
+
+    3）边框图片(IE11.0及以后版本支持）
+        border-image：source  slice width outset repeat
+            图片 向内偏移距离 宽度 图像区域超出边框的距离 重复效果;
+
+        重复效果：round（铺满）/stretch（拉伸）/repeat（平铺） */
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: darksalmon;
+            margin: 40px auto;
+        }
+
+        .test1 {
+            border: 1px solid;
+            border-radius: 30%;
+            box-shadow: 5px 5px 10px #f00;
+            /* box-shadow: inset 5px 5px 10px #f00; */
+        }
+
+        .test2 {
+            border: 20px solid;
+            border-image: url(img/border.jpg) 30 repeat;
+            /* border-image: url(img/border.jpg) 30 stretch; */
+            /* border-image: url(img/border.jpg) 30 round; */
+        }
+
+        /* CSS3背景
+    1）多重背景
+        background: 背景色 背景图片 平铺方式 位置,背景色 背景图片 平铺方式 位置,...
+    2）background-size：设定背景图像的尺寸。
+        background-size: 固定长度|百分比值|cover|contain;
+    3）background-origin：指定背景图像的位置区域。
+        background-origin: padding-box|border-box|content-box;
+    4）background-clip：设定背景的绘制区域。
+        background-clip: border-box|padding-box|content-box;
+    5）渐变背景
+        background-image: 线性渐变｜径向渐变 */
+        .bg1 {
+            width: 500px;
+            height: 500px;
+            background: url(img/ufo.png) no-repeat 50% 100%, url(img/stars.png) no-repeat 0 0, url(img/sky.png) no-repeat 0 0;
+            /* background-image: url(img/ufo.png), url(img/stars.png), url(img/sky.png);
+            background-position: 50% 100%, 0 0, 0 0;
+            background-repeat: no-repeat; */
+        }
+
+        .bg2 {
+            width: 600px;
+            height: 380px;
+            border: 10px solid slategrey;
+            color: #f00;
+            padding: 20px;
+            background: url(img/35.jpg) round content-box border-box;
+            background-size: 50% 30%;
+            /* background-image: url(img/35.jpg);
+            background-repeat: round;
+            background-origin: content-box; 
+             background-clip: border-box;  */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="test1"></div>
+    <div class="test2"></div>
+    <div class="bg1"></div>
+    <div class="bg2">内容区域</div>
+</body>
+
+</html>

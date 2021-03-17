@@ -1,0 +1,10 @@
+span {
+    font-size: 20px;
+    color: #ff0000;
+    display: block;
+}
+
+.box {
+    background: rgba(185, 196, 88, 0.753);
+    font-size: 30px;
+}

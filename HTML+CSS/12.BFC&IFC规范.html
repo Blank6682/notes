@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BFC&IFC规范</title>
+</head>
+
+<body>
+    <!-- BFC&IFC
+      FC:Fomatting Context(格式上下文)。它是CSS2.1规范中的一个概念。它是页面中的一块渲染区域，并且有一套渲染规则，它决定了其子元素将如何定位，以及和其他元素的关系和相互作用。
+  分为：BFC和IFC。
+  1）BFC：块级格式上下文
+        a）形成BFC的条件
+            i) 浮动元素（float除none以外的值）
+            ii）定位元素（position(absolute/fixed))
+            iii）display（值为inline-block/table-cell/table-caption时）
+            iv）overflow（值为hidden/auto/scroll时）
+        b）BFC特性（规则）
+            i)内部的盒子会在垂直方向上一个接一个的放置
+            ii)垂直方向上的距离会叠加，值由最大margin值决定（如果不要叠加，就需要将该盒子变成一个独立的盒子）
+            iii)BFC的区域不会float元素区域重叠
+            iv)计算BFC的高度时，浮动元素也参与计算
+            v)BFC就是页面上的一个独立的容器，容器里面的子元素不会影响到外面的元素
+        c）BFC的作用
+            i)解决margin重叠的问题（添加独立BFC）
+            ii)解决浮动高度塌陷的问题（在父级添加overflow:hidden）
+            iii)解决侵占浮动元素的问题（添加overflow:hidden清除浮动）
+  2）IFC：内联（行级）格式上下文
+         a）形成IFC的条件
+            i)font-size
+            ii)line-height
+            iii)height
+            iv)vertical-align
+         b）IFC特性（规则）
+            i)IFC的元素会在一行中从左至右排列
+            ii)在一行上的所有元素会在该区域形成一个行框
+            iii)行宽的高度为包含框的高度，高度为行框中最高元素的高度
+            iv)浮动的元素不会在行框中，并且浮动元素会压缩行框的宽度
+            v)行框的宽度容纳不下子元素时，子元素会换下一行显示，并且会产生新行框
+            vi)行框的元素内遵循text-align和vertical-align -->
+</body>
+
+</html>

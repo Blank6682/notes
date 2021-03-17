@@ -1,0 +1,63 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    padding: 10px 0;
+    font-family: 微软黑体;
+}
+
+#box {
+    border: 1px solid #ccc;
+    width: 640px;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 20px;
+    text-align: center;
+    margin: 10px 0 20px;
+}
+
+p {
+    font-size: 14px;
+    text-indent: 2em;
+    margin: 1.5em 0;
+    line-height: 1.5em;
+}
+
+/* 设置第一段属性 */
+h1+p {
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+    text-indent: 0;
+    color: blue;
+    font-size: 12px;
+}
+
+.summary {
+    color: red;
+}
+
+ul {
+    list-style-type: none;
+    text-indent: 2em;
+    font-size: 12px;
+}
+
+ul li {
+    line-height: 2em;
+}
+
+a {
+    color: gray;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #000;
+    text-decoration: underline;
+}

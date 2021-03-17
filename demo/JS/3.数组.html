@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组练习</title>
+    <script>
+        //1.创建一个指定范围的数组
+        // const numbers = arrayFromRange(1, 4);
+        // console.log(numbers);
+
+        // function arrayFromRange(min, max) {
+        //     let output = [];
+        //     for (let i = min; i <= max; i++)
+        //         output.push(i);
+        //     return output;
+        // };
+
+        //2.实现includes()方法
+        // const numbers = [1, , 2, 3, 4];
+        // console.log(include(numbers, 2));
+
+        // function include(array, searchElement) {
+        //     for (const value of array) {
+        //         if (value === searchElement)
+        //             return true;
+        //     }
+        //     return false;
+        // }
+
+        // 3.数组的去重
+        // const numbers = [1, 2, 3, 4, 1, 2, 1];
+        // const output = except(numbers, [1, 2]);
+        // console.log(output);
+
+        // function except(array, excluded) {
+        //     const output = [];
+        //     for (let element of array)
+        //         if (!excluded.includes(element))
+        //             output.push(element);
+        //     return output;
+        // };
+
+        // 4.数组内的元素移动：指定索引位置元素，移动指定位置
+        // const numbers = [1, 2, 3, 4, 5, 6];
+        // const output = move(numbers, 2, -2);
+        // console.log(output);
+
+        // function move(array, index, offset) {
+        //     const position = index + offset;
+
+        //     if (position >= array.length || position < 0) {
+        //         console.error('Invalid offset');
+        //         return;
+        //     }
+
+        //     const output = [...array];
+        //     const element = output.splice(index, 1)[0];
+        //     output.splice(position, 0, element);
+        //     return output;
+        // }
+
+        //5.返回数组中，某个元素出现的次数
+        // const numbers = [1, 2, 3, 4, 1];
+        // const count = countOccurrences(numbers, 1);
+        // console.log(count);
+
+        // function countOccurrences(array, searchElement) {
+        //     //let count = 0;
+        //     // for (let element of array) {
+        //     //     if (element === searchElement)
+        //     //         count++;
+        //     // }
+        //     //return count; 
+
+        //     //reduce()方法
+        //     return array.reduce((accumulator, currentValue) => {
+        //         const occurrences = (currentValue === searchElement) ? 1 : 0;
+        //         //console.log(accumulator,currentValue,searchElement);
+        //         return occurrences + accumulator;
+        //     }, 0);
+        // }
+
+        // 6.输出下面条件1.year=2018 2.rating>4 3.降序 然后把title显示
+        const movies = [{
+            title: 'a',
+            year: 2018,
+            rating: 4.5
+        }, {
+            title: 'b',
+            year: 2018,
+            rating: 4.7
+        }, {
+            title: 'c',
+            year: 2018,
+            rating: 3
+        }, {
+            title: 'd',
+            year: 2017,
+            rating: 4.5
+        }];
+        const title = movies
+            .filter(n => n.year === 2018 && n.rating >= 4)
+            .sort((a, b) => b.rating - a.rating)
+            .map(n => n.title);
+        console.log(title);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

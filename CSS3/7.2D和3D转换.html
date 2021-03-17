@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2D和3D转换</title>
+    <style>
+        div {
+            width: 200px;
+            height: 100px;
+            background: #1bbedb;
+            text-align: center;
+            color: #fff;
+            font-size: 20px;
+            margin-top: 50px;
+        }
+
+        /* 1.变形(transform）
+        位移效果：PX
+                translate(x,y) 定义 2D 转换，沿着 X 和 Y 轴移动元素。 
+                translateX(n) 定义 2D 转换，沿着 X 轴移动元素。
+                translateY(n) 定义 2D 转换，沿着 Y 轴移动元素。
+                rotateZ(N)  沿着Z轴的方向顺指针旋转。*/
+        .translate {
+            transform: translate(300px, 30px);
+        }
+
+        /*   旋转效果：deg/-deg
+         rotate(angle) 定义 2D 旋转，在参数中规定角度（-360deg - 360deg）。 */
+        .rotate {
+            transform: rotate(45deg);
+        }
+
+        /* 缩放效果: 倍数
+            scale(x,y) 定义 2D 缩放转换，改变元素的宽度和高度。 
+            scaleX(n) 定义 2D 缩放转换，改变元素的宽度。
+            scaleY(n) 定义 2D 缩放转换，改变元素的高度。 */
+        .scale {
+            transform: scale(3, 1);
+        }
+
+        /*  倾斜效果:deg / -deg
+            skew(x-angle,y-angle) 定义 2D 倾斜转换，沿着 X 和 Y 轴。  
+            skewX(angle) 定义 2D 倾斜转换，沿着 X 轴。
+            skewY(angle) 定义 2D 倾斜转换，沿着 Y 轴。 */
+        .skew {
+            transform: skew(30deg, 20deg);
+        }
+
+        /*矩阵变形：matrix(a,b,c,d,e,f)（线性代数）
+        a c e
+        b d f
+        0 0 1
+        matrix用一个3行3列的矩阵表示，a和b列表示x轴，c和d列表示y轴，e和f列表示z轴
+        a和d表示缩放（如果没有缩放，值设为1）
+        b和c表示扭曲（如果没有扭曲，值为0）
+        e和f表示位移（如果没有位移，值为0）
+
+        如果旋转角度为θ,它会影响到a,b,c,d的值：
+            a = cosθ
+            b = sinθ
+            c = -sinθ
+            d = cosθ
+        如果扭曲skew(θ1,θ2)，会影响到b和c的值：
+            b = tanθ1
+            c = tanθ2
+
+        每次旋转和扭曲都会产生一个新矩阵，最终形成的多个矩阵要做乘法运算。
+        如果对一个元素同时有旋转、扭曲、缩放和位移，这里需要用到多个矩阵相乘，要优先考虑旋转和缩放！！！  */
+        .matrix {
+            transform: matrix(1.299, 0.75, -1, 1.732, 100, 50);
+            -webkit-transform: matrix(1.299, 0.75, -1, 1.732, 100, 50);
+            /* transform: translate(100px, 50px) rotate(30deg) scale(1.5, 2); */
+        }
+
+        /* 2.transform-origin：调整元素的基点。默认在中心
+        transform-origin: x-axis y-axis z-axis;
+        属性值：
+        x-axis ：定义视图被置于 X 轴的何处。可能的值：left，center，right，length，%。
+        y-axis ：定义视图被置于 Y 轴的何处。可能的值：top，center，bottom，length，%。
+        z-axis ：定义视图被置于 Z 轴的何处。可能的值：length。 */
+        .container {
+            background-color: #fff;
+            height: 200px;
+            border: 1px solid #000;
+            margin-top: 200px;
+        }
+
+        .transform-origin {
+            margin-top: 0;
+            width: 50px;
+            height: 50px;
+            transform: rotate(40deg);
+            transform-origin: right top;
+            /* transform-origin: 0 0; */
+        }
+
+        /* 3.perspective
+            让子元素获得透视效果。
+            perspective:length|none;
+            主流浏览器都不支持，谷歌要加-webkit-，或在长度后加单位。 */
+        .father {
+            background-color: #fff;
+            height: 200px;
+            border: 1px solid #000;
+            perspective: 100;
+            -webkit-perspective: 100;
+        }
+
+        .son {
+            width: 180px;
+            margin: 50px auto;
+            border: 1px solid #f00;
+            transform: rotateX(45deg);
+        }
+
+        /* 4. transform-style
+            在3D空间中呈现被嵌套的元素(必须与 transform 属性一同使用)。
+            transform-style: flat(默认)|preserve-3d;*/
+
+        .div1 {
+            background-color: khaki;
+            transform: rotateY(60deg);
+            transform-style: preserve-3d;
+        }
+
+        .div2 {
+            background-color: aqua;
+            transform: rotateY(80deg);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="translate">translate平移</div>
+    <div class="rotate">rotate旋转</div>
+    <div class="scale">scale缩放</div>
+    <div class="skew">skew倾斜</div>
+    <div class="matrix">matrix函数</div>
+    <div class="container">
+        <div class="transform-origin">设置原点</div>
+    </div>
+    <div class="father">
+        <div class="son">透视</div>
+    </div>
+    <div class="div1">div1
+        <div class="div2">div2</div>
+    </div>
+
+</body>
+
+</html>

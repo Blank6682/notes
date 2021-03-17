@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML语义化标签</title>
+    <style>
+        dialog {
+            position: relative;
+        }
+
+        dialog span {
+            position: absolute;
+            right: 10px;
+            top: 5px;
+            cursor: pointer;
+            /* 设置鼠标显示 */
+        }
+
+        figure {
+            width: 400px;
+            text-align: center;
+        }
+
+        figure img {
+            width: 100%;
+        }
+
+        figure p {
+            margin-top: -5px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HTML5新特性（面试）
+        1）增加了audio和video音频播放，抛弃了Flash
+        2）新增了canvas画布（绘画，制作动画（如小游戏开发等））
+        3）地理定位
+        4）增加了离线缓存
+        5）硬件加速
+        6）Web Socket（全双工通信）
+        7）增加了本地存储
+        8）新增了一些语义化标签
+    网页布局标签:
+        header:页首
+        nav:导航栏
+        aside:侧边栏
+        main:主体
+        section:区块
+        article:文章
+        footer:页尾 -->
+    <!-- 语义化标签：1.mark：高亮显示（行级） -->
+    <p>这是一段高亮显示文本：<mark>高亮显示</mark></p>
+
+    <!-- 2.details（描述）与summary(摘要)、：一般用于名词解释 -->
+    <details>
+        <summary>大前端开发</summary>
+        <h2>大前端开发包括：</h2>
+        <ul>
+            <li>组件化开发</li>
+            <li>模块化开发</li>
+            <li>自动化开发</li>
+            <li>后台开发</li>
+        </ul>
+    </details>
+
+    <!--3.meter:显示一个计数仪表 属性:value/min/max-->
+    <meter value="100" min="50" max="150"></meter>公里/小时<br>
+
+    <!-- 4.progress:进度条  属性:value/min/max-->
+    <p>下载进度：</p>
+    <progress max="100" value="70"></progress>70%
+
+    <!-- 5.dialog:对话框/窗口 -->
+    <dialog open>
+        <span>&times;</span>
+        <h2>大前端开发包括：</h2>
+        <ul>
+            <li>组件化开发</li>
+            <li>模块化开发</li>
+            <li>自动化开发</li>
+            <li>后台开发</li>
+        </ul>
+    </dialog>
+    <!-- 6.figure:用于对元素进行组合（一般用来组合一张图的标题、图片和图片描述等）-->
+    <figure>
+        <h3>夕阳西下</h3>
+        <img src="./img/10.jpg" />
+        <p>夕阳无限好，只是近黄昏！</p>
+    </figure>
+</body>
+
+</html>
