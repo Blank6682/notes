@@ -1,0 +1,1 @@
+vue img src 需要用require()包裹  <img src="require(url)"/>

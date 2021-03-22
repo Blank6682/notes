@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+    
+</body> 
+<script>
+    //生命周期函数，在某一时刻会被自动执行
+    const app=Vue.createApp({
+        data () {
+            return {
+                msg:'Lift Cycle Function'
+            }
+        },
+        //实例生成之前
+        beforeCreate() {
+            console.log("beforeCreate");
+        },
+        //实例生成之后。。。
+        created() {
+            console.log("create");
+        },
+        //模板被编程函数之后（即组件内容被渲到界面之前。。。
+        beforeMount () {
+            console.log(document.getElementById('root').innerHTML,"beforeMount");
+        },
+        //组件内容被渲染到界面之后。。。
+        mounted () {
+            console.log(document.getElementById('root').innerHTML,"mounted");
+        },
+        //data中的数据发生改变的时。。。
+        beforeUpdate() {
+            console.log("beforeUpdate");
+        },
+        //data中的数据发生变化，同时页面完成更新之后。。。
+        updated () {
+            console.log("updated");
+        },
+        //vue应用失效时
+        beforeUnmount() {
+            console.log("beforeUnMount");
+            console.log(document.getElementById('root').innerHTML,"beforeMount");
+        },
+        //vue应用失效是，且dom完全销毁时
+       unmounted() {
+            console.log("unmounted");
+            console.log(document.getElementById('root').innerHTML,"unmounted");
+        },
+        methods: {
+            handleUpData(){
+                this.msg="ChangeData";
+            }
+        },
+        template:`<div><h2>{{msg}}</h2>
+            <button v-on:click="handleUpData">UpData</button></div>`
+    })
+    const vm=app.mount('#root');
+    
+</script>
+</html>

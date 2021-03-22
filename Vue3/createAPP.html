@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CreateApp</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body> 
+    <div id="root"></div>
+</body>
+
+<script>
+    //createApp创建一个Vue应用，存储到app变量中
+    //传入的参数表示，这个应用于的最外层组件该如何展示
+    //MVVM设计模式，m->model数据，v->view视图，vm->viewmodel视图数据连接层
+    const app=Vue.createApp({
+    data () {
+        return {
+            list:[],
+            inputValue:''
+        }
+    },
+    methods: {
+        handleAdd(){
+            if(this.inputValue){
+                this.list.push(this.inputValue)
+            }
+        },
+        handleDelete(index){
+            this.list.splice(index,1);
+        }
+    },
+    // directives:{
+    //     focus:{
+    //         inserted:function(el){
+    //             el.focus()
+    //         }
+    //     }
+    // },
+    directives: {
+        focus: {
+        // 指令的定义
+        inserted: function (el) {
+            el.focus()
+        }
+        }
+    },
+    template:`
+    <div>
+    <input v-model="inputValue"  v-focus/>
+    <button v-on:click="handleAdd">增加</button>
+    <ul>
+        <li v-for="(item,index) of list">
+            <list-item v-bind:content="item" v-bind:index="index">
+            </list-item>
+            <button v-on:click="handleDelete(index)">删除</button>
+            </li>
+    </ul>
+    </div>
+    `
+    })
+
+    app.component('listItem',{
+    props: ['content','index'],
+    template:`<div>
+        <span>{{index}}</span>
+        <span>--</span>
+        <span>{{content}}</span>
+            </div>`
+    }) 
+//vm表示的就是vue应用的根组件
+    const vm=app.mount('#root')
+    
+</script>
+</html>

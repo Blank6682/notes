@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>Document</title>
+    <style>
+        /* 入场动画 */
+        .list-enter-from{
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        .list-enter-active{
+            transition: all 1s ease-in;
+        }
+        .list-enter-to{
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .list-move{
+            transition: all 1s ease-in;
+        }
+        /* 离场动画 */
+        .list-leave-from{
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .list-leave-active{
+            transition: all 1s ease-out;
+        }
+        .list-leave-to{
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        .list-item{
+            display: inline-block;
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    
+</body>
+<script>
+    const app=Vue.createApp({
+        data () {
+            return {
+                show:true,
+                list:[1,2,3]
+            }
+        },
+        methods: {
+            handleAdd(){
+                this.list.unshift(this.list.length+1);
+            },
+            handleDelete(index){
+                this.list.splice(index,1);
+            }
+        },
+        template:`<div>
+            <transition-group name="list">
+        <span v-for="(item,index) in list" v-on:click="handleDelete(index)"  :key="item" class="list-item">{{item}}</span>
+        </transition-group>
+        <button v-on:click="handleAdd">增加</button>
+    </div>`
+    })
+    const vm=app.mount("#root");
+</script>
+</html>
