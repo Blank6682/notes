@@ -21,10 +21,13 @@
         },
         methods: {
         handleClick(){
+                // 周期函数会不断执行，直到执行clearInterval()被调用/窗口关闭
+                //执行一次可以用setTimeout()
                 const animation=setInterval(() => {
                     this.animationNumber++;                
                 if(this.animation==10)
                 {
+                    // 清除周期函数
                     clearInterval(animation);
                 }
                 },100)

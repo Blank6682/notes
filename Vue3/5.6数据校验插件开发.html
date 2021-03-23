@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+    </div>
+<button @click="handleAdd">+</button>
+</body>
+<script>
+    // 对数据做校验的插件
+    const validatorPlugin=(app,options)=>{
+              app.mixin({
+                created() {
+                    for(let key in this.$options.rules){
+                        const item=this.$options.rules[key];
+                        //监听key里面的值的改变
+                        this.$watch(key,(value)=>{
+                            // console.log(key+"change");
+                            const result=item.validate(value);
+                            if(!result){
+                                console.log(item.message)
+                            }
+                        })
+                    }
+                },
+            })
+    }
+
+    const app=Vue.createApp({
+        data () {
+            return {
+                name:"blank",
+                age:23        
+          }
+        },
+        rules:{
+            age:{
+                validate:age=>age>25,
+                message:"too young,too simple"
+            },
+            name:{
+                validate:name=> name.length>4,
+                message:"name is short"
+            }
+        },
+        methods: {
+            handleAdd(){
+                this.age++;
+            },
+            handleLess(){
+                this.age--;
+            }
+        },
+        template:`<div>name:{{name}}</div>
+        <div>age:{{age}}
+            <button @click="handleAdd">+</button> 
+            <button @click="handleLess" >-</button></div>`
+    }) 
+
+
+    //使用插件
+    app.use(validatorPlugin);
+
+    const vm=app.mount("#root")
+</script>
+</html>

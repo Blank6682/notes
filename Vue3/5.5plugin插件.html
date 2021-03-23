@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+    </div>
+
+</body>
+<script>
+    //plugin 插件 ，也就是是把一些通用性的功能封装起来
+    //创建插件  一个对象里面添加install 参数为 app,options
+    // const myPlugin=(app,options)=>{}
+    const myPlugin={
+        install(app,options){
+            // console.log(app,options)
+            //provide  子组件调用inject来注入值
+            app.provide("name","hello world")
+            // 自定义指令
+            app.directive('focus',{
+                mounted(el) {
+                    el.focus();
+                },
+            })
+            // mixin混入
+            app.mixin({
+                mounted(){
+                    console.log("mixin")
+                }
+            })
+            // app全局属性配置
+            app.config.globalProperties.$sayHello ="hello world" 
+        }
+    }
+
+    const app=Vue.createApp({
+        template:`<my-title />`
+    }) 
+
+
+    app.component("myTitle",{
+        inject:["name"],
+        mounted() {
+            console.log(this.$sayHello);
+        },
+        template:`<div>{{name}}
+            <input v-focus/>
+            </div>`
+    })
+
+    //使用插件
+    app.use(myPlugin,{name:'dell'});
+
+    const vm=app.mount("#root")
+</script>
+</html>

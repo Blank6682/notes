@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+
+</body>
+<script>
+    //Mixin混入， 组件内没有data是则使用mixin data
+    //组件data，methods，自定义属性优先级高于mixin data methods 自定义属性
+    //生命周期函数，先执行mixin里面的，再执行组件内的
+
+    // 局部mixin
+    const myMixin={
+        // 自定义属性，访问则需要this.$options.createStr
+        createStr:"mixin String",
+        data () {
+            return {
+                str:"mixin str",
+                number:222,
+            }
+        },
+        create(){
+            console.log("mixin create")
+        },
+        methods: {
+            handleClick(){
+                console.log("mixin handleClick")
+            }
+        },
+    }
+
+    //全局mixin,不用引入即可执行，代码可维护性不高，不推荐使用
+    // app.mixin({
+    //     data () {
+    //         return {
+    //             str:33,
+    //             number:9999,
+    //         }
+    //     }
+    // })
+
+    const app=Vue.createApp({
+        createStr:"create String",
+        data () {
+            return {
+                str:"string",
+                // number:111,
+            }
+        },
+        // 引入mixin
+        mixins:[myMixin],
+        create(){
+            console.log("create")
+        },
+        methods: {
+            handleClick(){
+                console.log("handleClick")
+            }
+        },
+        template:`<div>
+            <div>data混入：{{str}}</div>
+            <div>{{number}}</div>
+            <div>自定义属性： {{this.$options.createStr}}</div>
+            <child />
+            <button @click="handleClick">method</button>
+            </div>`
+    })    
+
+    //修改配置，mixin优先级高于组件的
+    app.config.optionMergeStrategies.createStr = (mixinVal,appValue) => {
+    return  mixinVal || appValue;
+    }
+
+    // 组件要先引入mixin才能真确调用值
+    app.component("child",{
+        mixins:[myMixin],
+        template:`<div>组件间混入：{{number}}</div>`
+    })
+
+    const vm=app.mount("#root")
+</script>
+</html>

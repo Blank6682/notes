@@ -62,7 +62,11 @@
         },
         template:`<div>
             <transition-group name="list">
-        <span v-for="(item,index) in list" v-on:click="handleDelete(index)"  :key="item" class="list-item">{{item}}</span>
+        <span 
+            v-for="(item,index) in list" 
+            v-on:click="handleDelete(index)"  
+            :key="item" class="list-item">
+            {{item}}</span>
         </transition-group>
         <button v-on:click="handleAdd">增加</button>
     </div>`
