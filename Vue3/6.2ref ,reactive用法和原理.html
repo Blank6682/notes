@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+    </div>
+</body>
+<script>
+
+//   ref,reactive响应式的引用
+//  原理，通过proxy对数据进行封装，当数据变化时，触发模板等内容的更新
+//  ref  处理基础类型的数据
+//  reactive 处理非基础类型的数据
+
+    const app=Vue.createApp({
+        
+        
+        setup(props,context) {
+
+            //proxy,"blank"变成proxy({value:"blank"})这样的一个响应式引用
+            // const {ref}=Vue;
+            // let name=ref("blank")
+            // // console.log(name)
+            // setTimeout(() => {
+            //     name.value="zro"
+            // }, 2000);
+            // return {name}
+
+            const { reactive,readonly,toRefs }=Vue;
+
+            //proxy,"blank"变成proxy({name:"blank"})这样的一个响应式引用
+            let nameObj=reactive({name:"blank",age:24});
+
+            //  readonly 只读 返回数据不能被响应式修改
+            // let copyName=readonly(nameObj);
+
+            setTimeout(() => {
+                nameObj.name="zro"
+                nameObj.age=18;
+            }, 2000);
+            // return {nameObj}
+
+    //toRefs  proxy{name:"blank",age:24} => name:proxy{value:"blank"}, age:proxy{value:25}
+            const {name,age}=toRefs(nameObj)
+            return {name,age}
+
+        },
+
+        template:`
+        <div>{{name}}</div>
+        <div>{{age}}</div>`
+    }) 
+
+
+    const vm=app.mount("#root")
+</script>
+</html>

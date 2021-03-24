@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+    </div>
+    
+</body>
+<script>
+    
+    const app=Vue.createApp({
+    //created 实例被完全初始化之前  不能使用this,不能调用实例上的方法
+        setup(props,context) {
+            return {
+                name:"blank",
+                handleClick(){
+                   alert("123");
+                }
+            }
+        },
+
+        methods: {
+            test(){
+                console.log(this.$options.setup())
+            }
+        },
+        mounted () {
+          this.test();  
+        },
+        template:`
+        <div @click="handleClick">{{name}}</div>
+        <div></div>`
+    }) 
+
+
+    const vm=app.mount("#root")
+</script>
+</html>

@@ -10,7 +10,7 @@
 <body>
     <div id="root">
     </div>
-<button @click="handleAdd">+</button>
+    
 </body>
 <script>
     // 对数据做校验的插件
@@ -39,6 +39,7 @@
                 age:23        
           }
         },
+        // vue不识别，可以用plugin插件处理
         rules:{
             age:{
                 validate:age=>age>25,
@@ -57,7 +58,8 @@
                 this.age--;
             }
         },
-        template:`<div>name:{{name}}</div>
+        template:`
+        <div>name:<input type="text" v-model="name"></div>
         <div>age:{{age}}
             <button @click="handleAdd">+</button> 
             <button @click="handleLess" >-</button></div>`

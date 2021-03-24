@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+    </div>
+
+</body>
+<script>
+    // 关于list操作的内容进行了封装
+    const listRelativeEffect=()=>{
+        const {reactive}=Vue;
+        const list = reactive([1,2,3]);
+        const handleAdd = (e)=>{
+            if(!e==""){
+                list.push(e);
+                e=""
+            }
+        }
+        const handleDelete = (index)=>{
+                list.splice(index,1);
+        }
+        return { list,handleAdd,handleDelete}
+    }
+
+     // 关于inputValue操作的内容进行了封装
+     const inputValueRelativeEffect=()=>{
+        const {ref}=Vue;
+        const inputValue=ref("")
+        const handleInputValueChange = (e) =>{
+            inputValue.value = e.target.value;
+        }
+        return {inputValue,handleInputValueChange}
+     }
+
+
+    const app=Vue.createApp({
+        setup(props,context) {
+            //流程调度中转
+
+            const { list,handleAdd,handleDelete} =listRelativeEffect();
+            const {inputValue,handleInputValueChange}=inputValueRelativeEffect();
+            return {
+                inputValue,list,
+                handleAdd,handleDelete,handleInputValueChange
+            }
+        },
+        
+        template:`  <div>
+            <div>
+                <input type="text" :value="inputValue" @input="handleInputValueChange">
+                <button @click="handleAdd(inputValue)">增加</button>
+                <ul>
+                    <li v-for="(item,index) in list">{{item}}
+                        <button @click="handleDelete(index)">删除</button>
+                        </li>
+                </ul>
+            </div>
+        </div>`,
+
+    }) 
+
+
+    app.component("child",{})
+
+    const vm=app.mount("#root")
+</script>
+</html>
