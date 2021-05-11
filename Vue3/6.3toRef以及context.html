@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,43 +8,45 @@
     <script src="https://unpkg.com/vue@next"></script>
     <title>Document</title>
 </head>
+
 <body>
     <div id="root">
     </div>
 </body>
 <script>
-//   toRef            
-// 从data中寻找age 没找到则赋予新属性，一般不建议使用，一般直接在data添加age:""
-// const {age}=toRef(data,"age");
-    const app=Vue.createApp({
+    //   toRef            
+    // 从data中寻找age 没找到则赋予新属性，一般不建议使用，一般直接在data添加age:""
+    // const {age}=toRef(data,"age");
+    const app = Vue.createApp({
         methods: {
-              handleChange(){
+            handleChange() {
                 alert("change");
             }
         },
-        template:`<child @change="handleChange">parent<child/>`,
-    }) 
+        template: `<child @change="handleChange">parent<child/>`,
+    })
 
 
-    app.component("child",{
+    app.component("child", {
         // mounted(){
         //     console.log(this.$slots.default());
         // },
-        mounted () {
-                this.$emit('change')
-         }
+        mounted() {
+            this.$emit('change')
+        }
         ,
-        setup(props,context) {
-            const { h }=Vue;
+        setup(props, context) {
+            const { h } = Vue;
             // None-Props属性  插槽内容  事件
-            const {attrs,slots,emit}=context;
+            const { attrs, slots, emit } = context;
 
-            console.log(attrs.app); 
+            console.log(attrs, slots, emit);
 
-            return ()=> h('div',{app:"app"},slots)
-    }
-})
+            return () => h('div', { app: "app" }, slots)
+        }
+    })
 
-    const vm=app.mount("#root")
+    const vm = app.mount("#root")
 </script>
+
 </html>

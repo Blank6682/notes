@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,68 +8,72 @@
     <script src="https://unpkg.com/vue@next"></script>
     <title>Document</title>
 </head>
+
 <body>
     <div id="root">
     </div>
-    
+
 </body>
 <script>
     // 对数据做校验的插件
-    const validatorPlugin=(app,options)=>{
-              app.mixin({
-                created() {
-                    for(let key in this.$options.rules){
-                        const item=this.$options.rules[key];
-                        //监听key里面的值的改变
-                        this.$watch(key,(value)=>{
-                            // console.log(key+"change");
-                            const result=item.validate(value);
-                            if(!result){
-                                console.log(item.message)
-                            }
-                        })
-                    }
-                },
-            })
+    const validatorPlugin = (app, options) => {
+        app.mixin({
+            created() {
+                for (let key in this.$options.rules) {
+                    const item = this.$options.rules[key];
+                    //监听key里面的值的改变
+                    this.$watch(key, (value) => {
+                        // console.log(key + "change");
+                        const result = item.validate(value);
+                        if (result) {
+                            console.log(item.message)
+                        }
+                    })
+                }
+            },
+        })
     }
 
-    const app=Vue.createApp({
-        data () {
+    const app = Vue.createApp({
+        data() {
             return {
-                name:"blank",
-                age:23        
-          }
+                name: "blank",
+                age: 23
+            }
         },
         // vue不识别，可以用plugin插件处理
-        rules:{
-            age:{
-                validate:age=>age>25,
-                message:"too young,too simple"
+        rules: {
+            age: {
+                validate: age => age < 25,
+                message: "too young,too simple"
             },
-            name:{
-                validate:name=> name.length>4,
-                message:"name is short"
+            name: {
+                validate: name => name.length < 4,
+                message: "name is short"
             }
         },
         methods: {
-            handleAdd(){
+            handleAdd() {
                 this.age++;
             },
-            handleLess(){
+            handleLess() {
                 this.age--;
             }
         },
-        template:`
+        template: `
         <div>name:<input type="text" v-model="name"></div>
-        <div>age:{{age}}
+        <div>age:
+            <button @click="handleLess" >-</button>
+            {{age}}
             <button @click="handleAdd">+</button> 
-            <button @click="handleLess" >-</button></div>`
-    }) 
+            </div>`
+    })
 
 
     //使用插件
     app.use(validatorPlugin);
 
-    const vm=app.mount("#root")
+    const vm = app.mount("#root")
 </script>
+
 </html>

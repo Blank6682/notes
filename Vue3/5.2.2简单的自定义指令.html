@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,7 +8,7 @@
     <script src="https://unpkg.com/vue@next"></script>
     <title>Document</title>
     <style>
-        .header{
+        .header {
             position: absolute;
             width: 100px;
             height: 100px;
@@ -15,35 +16,36 @@
         }
     </style>
 </head>
+
 <body>
     <div id="root"></div>
 </body>
 <script>
 
-    const app=Vue.createApp({
-        data () {
+    const app = Vue.createApp({
+        data() {
             return {
-                distance:100,
+                distance: 100,
             }
         },
-        methods:{
-            handleClick(){
-                this.distance=this.distance+100;
+        methods: {
+            handleClick() {
+                this.distance = this.distance + 100;
             }
         },
-        template:`<div>
+        template: `<div>
                 <div v-pos:left="distance" class="header">left</div>
-                <div v-pos:top="distance" class="header">right</div>
-                <button @click="handleClick">top100</button>
+                <div v-pos:top="distance" class="header">bottom</div>
+                <button @click="handleClick">move100</button>
             </div>`
-    })    
+    })
 
 
-    app.directive("pos",(el,binding)=>{
-        // console.log(el,binding,"binding");
-        el.style[binding.arg]=(binding.value+"px")
-    },);
-  
+    app.directive("pos", (el, binding) => {
+        console.log(el, binding, "binding");
+        el.style[binding.arg] = (binding.value + "px")
+    });
+
     // 生命周期函数里面的内容相同，可以用上面的函数形式
     // app.directive("pos",{
     //     mounted(el,binding){
@@ -53,6 +55,7 @@
     //         el.style.top=binding.value+"px"
     //     }
     // })
-    const vm=app.mount("#root")
+    const vm = app.mount("#root")
 </script>
+
 </html>

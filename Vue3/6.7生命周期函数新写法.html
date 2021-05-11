@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+    </div>
+
+</body>
+<script>
+    const app=Vue.createApp({
+        setup(props){
+            const {ref,onBeforeMount,onMounted,onBeforeUpdate,onUpdated,onRenderTracked,onRenderTriggered,onBeforeUnmount,onUnmounted
+            }=Vue;
+            const name=ref("blank")
+            const show=ref(true)
+            // 挂载
+            onBeforeMount(() => {
+                console.log("onBeforeMount");
+            })
+            onMounted(() => {
+                console.log("onMounted");
+            })
+            // 数据更新
+            onBeforeUpdate(() => {
+                console.log("onBeforeUpdated");
+            })
+            onUpdated(() => {
+                console.log("onUpdated");
+            })
+            // 每次渲染后重新手机响应式依赖
+            onRenderTracked(() => {
+                console.log("onRenderTracked");
+            })
+            // 每次触发页面重新渲染自动执行
+            onRenderTriggered(() => {
+                console.log("onRenderTriggered");
+            })
+            const handleClick=()=>{
+                name.value="zro"
+            }
+            const handleShow=()=>{
+                show.value=!show.value
+            }
+            return {name,show,handleClick,handleShow}
+        },
+        template:` <div @click="handleClick"> {{name}}</div>
+        <child v-if="show" @click="handleShow"/>`
+    }) 
+
+    app.component("child",{
+        setup(props) {
+            const {onBeforeUnmount,onUnmounted}=Vue;
+            // 销毁
+            onBeforeUnmount(() => {
+                console.log("onBeforeUnmount");
+            })
+            onUnmounted(() => {
+                console.log("onUnmounted");
+            })
+        },
+        template:`<div>Unmount</div>`
+    })
+    const vm=app.mount("#root")
+</script>
+</html>

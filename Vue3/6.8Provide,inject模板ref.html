@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root">
+    </div>
+
+</body>
+<script>
+    // provide  inject
+    // dom ref
+    const app = Vue.createApp({
+        setup() {
+            const { provide, ref } = Vue;
+            const changeName = (value) => {
+                name.value = value;
+            }
+            provide("name", ref("blank"));
+            provide("changeName", changeName);
+            return {}
+        },
+        template: `<div><child /></div>`
+    })
+
+    app.component("child", {
+        setup() {
+            const { inject } = Vue;
+            const name = inject("name");
+            const changeName = inject("changeName");
+            const handleClick = () => {
+                changeName("zro");
+            }
+            return { name, handleClick }
+        },
+        template: `<div @click="handleClick">{{name}}</div>`
+    })
+    const vm = app.mount("#root")
+</script>
+
+</html>

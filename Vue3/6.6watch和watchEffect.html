@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root">
+    </div>
+
+</body>
+<script>
+    //watch 侦听器
+    // watchEffect  侦听器，偏向于 effect
+    const app = Vue.createApp({
+        setup(props) {
+            const { reactive, watch, toRefs, watchEffect } = Vue;
+            const user = reactive({ name: "", age: 12 })
+            // 具有一定的惰性 lazy
+            // 参数可以拿到原始和当前值
+            // 可以监听多个数据的变化，用一个监听器承载
+            //     转变为函数
+            watch([() => user.name, () => user.age], ([newName, newAge], [oldName, oldAge]) => {
+                console.log("watch:", newName, oldName, "--", newAge, oldAge);
+            }, { immediate: true })//修改成非惰性
+
+            // 立即执行，没有惰性 immediate
+            // 不需要传递你要枕头的内容，回自动感知代码依赖，不要传递很多参数，只要传递一个回调函数
+            // 不能获取之前数据的值
+            const stop = watchEffect(() => {
+                console.log("watchEffect:", user.name, user.age);
+                // stop监听器
+                setTimeout(() => {
+                    stop();
+                }, 3000);
+            })
+
+
+            const { name, age } = toRefs(user)
+            return { name, age }
+        },
+        template: `   
+         <div>name: <input type="text" v-model="name"></div>
+        <div> name is {{name}}</div>
+        <div>age: <input type="number" v-model="age"></div>
+        <div> age is {{age}}</div>`
+    })
+
+
+    const vm = app.mount("#root")
+</script>
+
+</html>

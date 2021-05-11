@@ -1,0 +1,110 @@
+*{
+    padding: 0;
+    margin: 0;
+    --color1:#3e3ef5;
+    --color2:#bab5da;
+    --color3: #ff0000;
+    --color4:#6ed5f5;
+    --color5:#eb6bf0;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 600px;
+    height: 200px;
+    background-image: linear-gradient(90deg,#f3dc77,#edf373);   
+}
+.icon{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    width:60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 8px 6px 8px #ccc;
+    margin: 0 20px;
+    transition: 0.5s;
+    cursor:pointer ;
+}
+/* .icon:hover{
+    opacity: 1;
+} */
+.icon h1{
+    display: block;
+    position: absolute;
+    font-size: 20px;
+    background: #fff;
+    padding:  8px 15px 12px  15px; 
+    border-radius: 30px;
+    color: #fff;
+    box-shadow: 8px 6px 8px #ccc;
+    opacity: 0;
+    transition: 0.5s;
+    pointer-events: none;
+}
+.icon h1::before{
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 50%;
+    bottom: -10px;
+    transform: translateX(-50%)  rotate(-45deg);
+    
+}
+.icon i{
+    font-size: 30px;
+    
+}
+
+/* 彈出窗口顔色變化 */
+.google h1,
+.google h1::before{
+    background-color: var(--color1);
+}
+.twitch h1,
+.twitch h1::before{
+    background-color: var(--color2);
+}
+.youtube h1,
+.youtube h1::before{ 
+    background-color: var(--color3);
+}
+.facebook h1,
+.facebook h1::before{
+    background-color: var(--color4);
+}
+ .instagram h1,
+.instagram  h1::before{
+    background-color: var(--color5);
+}
+
+/* 鼠標懸停顔色變化 */
+.google:hover{
+    background-color: var(--color1);
+    color: #fff;
+}
+.twitch:hover{
+    background-color: var(--color2);
+    color: #fff;
+}
+.youtube:hover{
+    background-color: var(--color3);
+    color: #fff;
+}
+.facebook:hover{
+    background-color: var(--color4);
+    color: #fff;
+}
+.instagram:hover{
+    background-color: var(--color5);
+    color: #fff;
+}
+.icon:hover h1 {
+    top: -65px;
+    opacity: 1;
+} 
