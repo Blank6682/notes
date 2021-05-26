@@ -23,7 +23,7 @@ function getLength(input:string|number):number{
     }
 }
 
-//type guard 类型守卫
+//type guard
 function getLength2(input:string|number):number{
     if(typeof input==="string"){
         return input.length

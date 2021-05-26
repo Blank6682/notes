@@ -57,7 +57,7 @@
         template:`<div class="container">
             <button @click="handleClick">{{show?"隐藏":"显示"}}</button>
             <teleport to='#hello'>
-                <div class="content" v-show="show"></div>
+                <div class="content" v-show="show">传送门</div>
             </teleport>
             </div>`
     })    

@@ -41,8 +41,14 @@ const queue=new Queue<number>()
 queue.push(1)
 console.log(queue.pop().toFixed())
 
+//泛型在类和接口中的使用
 interface keyPair<T,U>{
     key:T,
     value:U
 }
-let kp1
+
+let kp1:keyPair<number,string>={key:123,value:"blank"}
+let kp2:keyPair<string,number>={key:"blank",value:123}
+
+let arr:number[]=[1,2,3]//普通写法
+let kpArr:Array<number>=[1,2,3]//指定类型，相当于泛型
