@@ -1,0 +1,56 @@
+* {
+    padding: 0;
+    margin: 0;
+  }
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 400px;
+    height: 400px;
+    background: #000;
+  }
+
+  .btn {
+    position: relative;
+    border: none;
+    width: 150px;
+    height: 60px;
+    border-radius: 40px;
+    background-image: linear-gradient(90deg, #c6ffdd, #fbd786, #f7797d, #c6ffdd);
+
+    background-size: 400%;
+  }
+
+  .btn:hover {
+    animation: show 8s linear infinite;
+  }
+
+/* 设置背景颜色 */
+  .btn:before {
+    position: absolute;
+    content: "";
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background-image: linear-gradient(90deg, #c6ffdd, #fbd786, #f7797d, #c6ffdd);
+
+    background-size: 400%;
+    opacity: 0;
+    filter: blur(20px);
+  }
+/* 背景颜色动画与按钮保持一致 */
+  .btn:hover::before {
+    animation: show 8s linear infinite;
+    opacity: 0.8;
+  }
+  @keyframes show {
+    0% {
+      background-position: 0%;
+    }
+    100% {
+      background-position: 400%;
+    }
+  }
