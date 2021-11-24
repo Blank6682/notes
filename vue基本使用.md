@@ -38,6 +38,69 @@
 - v-if和v-show的使用场景
 
   在dom节点需要频繁变更隐藏/显示的时候,使用v-show则减少了dom节点的频繁销毁，可以提高性能。
+  
+  #### 事件
+  
+  - vue的事件是绑定在目标dom下的
+  
+  #### vue组件使用
+  
+  - props、$emit
+  
+    - 父组件通过props向子组件传递，子组件通过$emit向父组件传递
+  
+  - 组件之间的通讯，自定义事件
+  
+    - 将事件绑定在一个新的vue实例中，自定义事件要及时销毁,即组件beforeDestroy()中销毁，不然导致内存泄露
+  
+    ```javascript
+    //通用组件，event.vue
+    import Vue from 'vue'
+    export default new Vue()
+    
+    //绑定自定义事件 ，一个组件
+    import event from "../common/event"
+    event.$on("addTitle",fn)
+    
+    //调用自定义事件，另外一个组件
+    import event from "../common/event"
+    event.$emit("addTitle",value)
+    ```
+  
+  - 组件生命周期
+  
+    ![Vue 实例生命周期](https://cn.vuejs.org/images/lifecycle.png)
+  
+  #### 修饰符
+  
+  - 事件修饰符
+  
+  ```html
+  <!-- 阻止单击事件继续传播 -->
+  <a v-on:click.stop="doThis"></a>
+  
+  <!-- 提交事件不再重载页面 -->
+  <form v-on:submit.prevent="onSubmit"></form>
+  
+  <!-- 修饰符可以串联 -->
+  <a v-on:click.stop.prevent="doThat"></a>
+  
+  <!-- 只有修饰符 -->
+  <form v-on:submit.prevent></form>
+  
+  <!-- 添加事件监听器时使用事件捕获模式 -->
+  <!-- 即内部元素触发的事件先在此处理，然后才交由内部元素进行处理 -->
+  <div v-on:click.capture="doThis">...</div>
+  
+  <!-- 只当在 event.target 是当前元素自身时触发处理函数 -->
+  <!-- 即事件不是从内部元素触发的 -->
+  <div v-on:click.self="doThat">...</div>
+  ```
+  
+  - 表单修饰符
+    - .lazy  懒加载，一般用于输入框
+    - .number 数字返回number,不是输入数字返回string
+    - .trim 去除前后空格
 
 #### 循环（列表渲染）
 
@@ -55,12 +118,48 @@
 
   - 这种场景建议使用 computed，先对数据进行过滤
 
-
-- 生命周期函数
-
-  ![Vue 实例生命周期](https://cn.vuejs.org/images/lifecycle.png)
-
 ### vue的高级特性
+
+- 自定义v-model
+
+```vue
+//自定义v-model组件，CustomizeModel.vue
+<template>
+	<div>
+    	<input type="text" :value="text" @input="$emit($event.targer.value)" />
+    </div>
+</template>
+<script>
+export default{
+    model:{
+      prop:text //对应props的值，text
+    },
+    props:{
+        text:String, 
+        default(){
+            return ''
+        }
+    }
+}
+</script>
+
+//调用v-model组件，
+import CUustomizeModel from "./CustomizeModel.vue"
+<template>
+	<div>
+    	<CUustomizeModel v-model="text" />
+    </div>
+</template>
+<script>
+export default{
+	data(){
+        return{
+            text:""
+        }
+    }
+}
+</script>
+```
 
 #### $nextTick
 
@@ -340,26 +439,25 @@
         for(let key in target){
             defineReactive(target,key,target[key])
         }
-    }
+    } 
     
     ```
 
     
 
-  - 几个缺点
-
-    - 深度监听，递归到底，一次性计算量大
-    - 无法监听新增和删除的属性,需要使用Vue.set()和Vue.delete()
-    - 无法监听原生数组需要特殊处理
-
 - Obiject.defineProperty的一些缺点（vue3.0启用Proxy）
+
+  - 深度监听，递归到底，一次性计算量大
+  - 无法监听新增和删除的属性,需要使用Vue.set()和Vue.delete()
+  - 无法监听原生数组需要特殊处理
 
 - proxy有兼容性问题
 
   - proxy兼容性不好，且无法polyfill
-  - vue2.x还会存在
 
 #### 虚拟DOM(vdom)和diff  
+
+##### 	v-dom
 
 - dom操作非常耗费性能
 
@@ -406,9 +504,13 @@
   </script>
   ```
 
+  ##### diff
+  
   
 
 #### 模板编译
+
+
 
 #### 渲染过程
 
