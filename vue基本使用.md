@@ -531,11 +531,23 @@ export default{
   ​	通过patchVnode(oldVnode, vnode)
 
   - 执行prepatch hook
-  - 设置vnode.elm
-  - 如果vnode.text ===undefined (vnode.children 一般有值，反之则无值) ，然后做一些特殊处理
-  - oldVnode.text !==vonde.text ,则把oldVnode.text删除
 
-  
+  - 设置vnode.elm
+
+  - 如果vnode.text ===undefined (vnode.children 一般有值，反之则无值) ，然后做一些特殊处理
+
+    根据新旧的children对比执行不同的操作
+
+    - 新旧都有，执行undateChildren()
+    - 新有，旧无，清空旧的text,执行addVnode()添加children
+    - 新无，旧有，执行removeVnode()移除旧的children
+    - 新旧都无值，则把text设置为空
+
+  - oldVnode.text !==vonde.text ,则把oldVnode.text移除，设置新的vnode.text
+
+  - updateChildren
+
+  vue中的流程为
 
   
 
