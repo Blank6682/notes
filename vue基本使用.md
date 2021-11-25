@@ -505,7 +505,40 @@ export default{
   ```
 
   ##### diff
+
+  diff算法时间复杂度为O(n^3)
+
+  - 第一，遍历tree1；第二，遍历tree2
+  - 第三，排序
+  - 1000个节点，要计算1亿次，算法不可用。
+  - 对应diff算法不可用的解决方案：优化时间复杂度到O(n)
+    - 只比较同一级，不跨级对比
+    - tag不相同，则直接删掉重建，不再深度比较
+    - tag和key,两者相同，则认为是相同节点，不度深度比较
+
+  通过snabbdom去了解vue中的虚拟dom实现过程，snabbdom中流程为
+
+  patch(） ---虚拟DOM的核心
+
+  ​     通过patch(oldVnode, newVnode);来判断两个元素是否相同，oldVnode 可以是Vnode|Element
+
+  - 执行pre  hook（生命周期，patch开始之前）
+  - 第一步，判断第一个参数是否为vnode,不是则创建一个新的vnode，关联到这个dom元素
+  - 第二步，判断是否为相同的vnode,key和sel相同，不是相同的则直接删掉重建
+
+  patchVnode()
+
+  ​	通过patchVnode(oldVnode, vnode)
+
+  - 执行prepatch hook
+  - 设置vnode.elm
+  - 如果vnode.text ===undefined (vnode.children 一般有值，反之则无值) ，然后做一些特殊处理
+  - oldVnode.text !==vonde.text ,则把oldVnode.text删除
+
   
+
+  
+
   
 
 #### 模板编译

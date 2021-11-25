@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      //基础连接
+      const ajax = new XMLHttpRequest();
+      ajax.open("get","http://localhost:8888/?name=blankzro&age=24")//测试node代理端口改8888
+      ajax.send()
+      ajax.onreadystatechange = function (){
+          if(ajax.readyState == 4 && ajax.status == 200){
+              console.log(ajax.responseText)
+          }
+      }
+
+      //jsonp解决跨域
+      // const jsonp = (url, params, cbName) => {
+      //   return new Promise((resolve, reject) => {
+      //     const script = document.createElement("script");
+      //     window[cbName] = (data) => {
+      //       resolve(data);
+      //       document.body.removeChild(script);
+      //     };
+      //     params = { ...params, callback: cbName };
+      //     const arr = Object.keys(params).map((key) => `${key}=${params[key]}`);
+      //     script.src = `${url}?${arr.join("&")}`;
+      //     document.body.appendChild(script);
+      //   });
+      // };
+      // jsonp("http://localhost:8000/",{ name: "blankzro", age: 24 },'callback'
+      // ).then((data) => {
+      //   console.log(data);
+      // });
+
+      //WebSocket
+      // function myWebSocket(url,params){
+      //   return new Promise((resolve,reject)=>{
+      //     const socket = new WebSocket(url)
+      //     socket.onopen = ()=>{
+      //       socket.send(JSON.stringify(params))
+      //     }
+      //     socket.onmessage = (e)=>{
+      //       resolve(e.data)
+      //     }
+      //   })
+      // }
+      // myWebSocket("ws://localhost:8000",{name:'blankzro',age:24}).then(data =>{
+      //   console.log(data)
+      // })
+
+    </script>
+  </body>
+</html>
