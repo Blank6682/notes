@@ -561,6 +561,30 @@ export default{
 
 #### 前端路由
 
+查漏：
+
+计算机网络基础
+
+从输入路由到浏览器渲染的过程，
+
+
+
+js:
+
+布局判断元素位置方法：getBoundigClienRect ，intersionObsver
+
+promise調度器
+
+大文件上傳出方案
+
+async await 实现原理
+
+
+
+vueX持久化
+
+
+
 
 
 
