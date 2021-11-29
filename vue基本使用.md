@@ -559,7 +559,52 @@ export default{
 
 #### 渲染过程
 
+- 初次渲染过程
+  - 解析模板为render函数（或在开发环境已完成，vue-loader）
+  - 触发响应式，监听属性getter 、setter
+  - 执行render函数，生成vnode、patch（elm,vnode）
+    - 执行render函数会触发getter，摸到没用到的属性，不会触发get
+- 更新过程
+  - 更改data,触发seter(此前在getter中已被监听)
+  - 解析执行render函数，生成newVnode
+  - patch(vnode,newVnode)
+
+![data](https://cn.vuejs.org/images/data.png)
+
+#### 异步渲染
+
+- ​	汇总data的修改，一次性更新视图
+- ​	减少DOM操作次数
+
+总结
+
 #### 前端路由
+
+- url组成部分
+
+http://localhost:8080/hash.html?=searchWord=hash#/aaa/bbb
+
+location.protocol  http:   协议
+
+location.hostname   localhost     域名/IP地址
+
+location.host   localhost:8080     域名/IP地址+端口
+
+location.prot  8080    端口
+
+location.pathname   /hash.html   参数
+
+location.hash  #/aaa/bbb  哈希
+
+hash的特点
+
+- hash变化会触发页面跳转，即浏览器的前进后退
+- hash变化不会刷新页面，SPA必须的特点
+- hash永远不会提交到server端（前端自生自灭）
+
+
+
+
 
 查漏：
 
