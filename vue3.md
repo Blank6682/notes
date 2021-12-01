@@ -315,9 +315,11 @@ composition API实现逻辑复用
 
     
 
-setup中如何获取组件实例
+#### setup中如何获取组件实例？
 
 - 在setup和其他Composition API中没有this
-- 可通过getCurrentInstance 获取当前实例
+- 可通过getCurrentInstance() 获取当前实例
 - 若使用Options API可照常使用this
+
+#### vue3为何比vue2快？
 
