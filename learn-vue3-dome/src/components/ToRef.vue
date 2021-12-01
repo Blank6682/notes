@@ -1,8 +1,6 @@
 <template>
-  <div>
-    <h3>ToRef</h3>
-    <p>姓名{{ name }}</p>
-  </div>
+  <h3>ToRef</h3>
+  <p>姓名{{ name }}</p>
 </template>
 
 <script >

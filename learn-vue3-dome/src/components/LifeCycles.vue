@@ -1,13 +1,10 @@
 
 <template>
-  <div>
-    <h3>生命周期函数</h3>
-    <p>{{ msg }}</p>
-  </div>
+  <h3>生命周期函数</h3>
+  <p>{{ msg }}</p>
 </template>
 
 <script>
-import { ref, toRef } from "@vue/reactivity";
 import {
   onBeforeMount,
   onBeforeUnmount,

@@ -1,9 +1,7 @@
 <template>
-  <div>
-    <h3>周期函数</h3>
-    <p>{{ number }}</p>
-    <button @click="handleAdd">+10</button>
-  </div>
+  <h3>周期函数</h3>
+  <p>{{ number }}</p>
+  <button @click="handleAdd">+10</button>
 </template>
 
 <script setup>

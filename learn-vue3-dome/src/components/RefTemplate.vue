@@ -1,8 +1,6 @@
 <template>
-  <div>
-    <h3>Ref template</h3>
-    <p ref="elemRef">测试文字Ref template</p>
-  </div>
+  <h3>Ref template</h3>
+  <p ref="elemRef">测试文字Ref template</p>
 </template>
 
 <script setup>

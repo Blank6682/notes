@@ -1,8 +1,6 @@
 <template>
-  <div>
-    <h3>ToRef</h3>
-    <p>姓名：{{ name }},年龄：{{ age }}(5秒后我变了！)</p>
-  </div>
+  <h3>ToRef</h3>
+  <p>姓名：{{ name }},年龄：{{ age }}(5秒后我变了！)</p>
 </template>
 
 <script >

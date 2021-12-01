@@ -1,8 +1,6 @@
 <template>
-  <div>
-    <h3>Ref</h3>
-    <p>{{ msgRef }}</p>
-  </div>
+  <h3>Ref</h3>
+  <p>{{ msgRef }}</p>
 </template>
 
 <script setup>

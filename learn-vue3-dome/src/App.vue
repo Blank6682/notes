@@ -9,6 +9,11 @@
     <RefTemplate />
     <ToRef />
     <ToRefs />
+    <MousePosition />
+    <ProxyObserber />
+    <VModelDemo />
+    <Watch />
+    <GetInstance />
   </div>
 </template>
 
@@ -19,6 +24,12 @@ import Ref from "./components/Ref.vue";
 import RefTemplate from "./components/RefTemplate.vue";
 import ToRef from "./components/ToRef.vue";
 import ToRefs from "./components/ToRefs.vue";
+import MousePosition from "./components/MousePosition/index.vue";
+import ProxyObserber from "./components/ProxyObserver/index.vue";
+import VModelDemo from "./components/VModelDemo/index.vue";
+import Watch from "./components/Watch.vue";
+import GetInstance from "./components/GetInstance.vue";
+
 //生命周期函数
 import LifeCycles from "./components/LifeCycles.vue";
 
