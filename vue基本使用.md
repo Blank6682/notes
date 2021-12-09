@@ -516,7 +516,7 @@ export default {
 
   patch(） ---虚拟 DOM 的核心
 
-  ​ 通过 patch(oldVnode, newVnode);来判断两个元素是否相同，oldVnode 可以是 Vnode|Element
+   通过 patch(oldVnode, newVnode);来判断两个元素是否相同，oldVnode 可以是 Vnode|Element
 
   - 执行 pre hook（生命周期，patch 开始之前）
   - 第一步，判断第一个参数是否为 vnode,不是则创建一个新的 vnode，关联到这个 dom 元素
@@ -524,7 +524,7 @@ export default {
 
   patchVnode()
 
-  ​ 通过 patchVnode(oldVnode, vnode)
+   通过 patchVnode(oldVnode, vnode)
 
   - 执行 prepatch hook
 
@@ -563,8 +563,8 @@ export default {
 
 #### 异步渲染
 
-- ​ 汇总 data 的修改，一次性更新视图
-- ​ 减少 DOM 操作次数
+-  汇总 data 的修改，一次性更新视图
+-  减少 DOM 操作次数
 
 总结
 
@@ -600,7 +600,7 @@ hash 的特点
 
 js:
 
-布局判断元素位置方法：getBoundigClienRect ，intersionObsver
+布局判断元素位置方法：getBoundigClientrRect ，**IntersectionObserver**
 
 promise 調度器
 
