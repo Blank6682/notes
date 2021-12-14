@@ -362,28 +362,42 @@ Object.prototype.tx_values = function(obj){
 
 ##### instanceof
 
-A instanceof B，判断A是否存在B的原型链,用于检测构造函数的 `prototype` 属性是否出现在某个实例对象的原型链上。
+`instanceof` **运算符**用于检测构造函数的 `prototype` 属性是否出现在某个实例对象的原型链上
+
+**关键点：**构造函数Fn的`prototype`，实例对象的原型链。
+
+**方法：** 遍历实例对象的原型链，挨个往上查找看是否有与Fn的`prototype`相等的原型，直到最顶层`Object`还找不到，那么就返回false
+
+##### 递归实现
 
 ```js
-function instanceof(father,child){
-	const fp = father.prototype
-    let cp = child.__proto__
-    while(cp){
-        if(cp === fp){
+const myInstanceOf = (obj,fn)=>{
+    if(obj === null && typeof obj !== "obj"){
+        return false
+    }
+    const proto = Object.getPrototypeOf(obj)
+    if(proto === fn.prototype){
+        return true
+    }else if(proto === null){
+        return false
+    }else{
+         myInstanceOf(proto)
+    }
+}
+```
+
+##### 遍历实现
+
+```js
+const myInstanceOf = (obj,fn)=>{
+    const proto = obj
+    while(proto = Object.getPrototypeOf(proto)){
+        if(proto === fn.prototype){
             return true
         }
-        cp = cp.__proto__
     }
     return false
 }
-//例子
-function Person(name){
-    this.name = name
-}
-const user = new Person("BlankZro")
-const user2 = {name:"abc"}
-console.log(instanceof(Person,user)) // true
-console.log(instanceof(Person,user2))//false
 ```
 
 ##### is
@@ -450,6 +464,19 @@ Function.prototype.tx_aplly = function (obj,agrs){
 }
 ```
 
+##### bind()
+
+注意
+
+- bind是返回一个函数，而不是执行结果
+- bind返回的函数，拿来当做构造函数，该怎么处理
+
+```js
+
+```
+
+
+
 #### Promise
 
 ##### all
@@ -479,4 +506,314 @@ function all(promises){
     })
 }
 ```
+
+### 高频手写js函数：
+
+#### 防抖
+
+一定时间段内没有再触发事件，事件处理函数才会执行一次
+
+```js
+function debounce(fn,deday) {
+    let timer
+    return function(...args){
+        timer && clearTimeout(timer)
+
+        timer = seeTimeout(()=>{
+            fn.apply(this,args)
+        },delay)
+    }
+}
+```
+
+#### 节流
+
+在指定的时间间隔内只会触发一次
+
+##### 基于时间戳
+
+```js
+function throttle(fn,delay){
+    let startTime = Date.now()
+    return function (...args){
+        let lastTime = Date.now
+        
+        if(lastTime - startTime >delay){
+            fn.apply(this,args)
+            startTime = Date.now
+        }
+    }
+}
+```
+
+##### 基于setTimeout
+
+```js
+function throttle(fn,dalay){
+    let timer
+    return function(...args){
+        if(!timer){
+            timer = setTimeout(()=>{
+                fn.apply(this,args)
+                timer = null
+            },delay)
+        }
+    }
+}
+```
+
+#### 实现new操作符
+
+**`new`** 关键字会进行如下的操作：
+
+1. 创建一个空的简单JavaScript对象（即` {} `）；
+2. 为步骤1新创建的对象添加属性 `proto` ，将该属性链接至构造函数的原型对象
+3. 将步骤1新创建的对象作为`this`的上下文,执行该函数 ；
+4. 如果该函数没有返回对象，则返回`this`。
+
+```js
+function myNew(fn,...args){
+    //1、2
+    let obj = Object.create(fn.prototype)
+    //3
+    let result = fn.apply(obj,args)
+    //4
+    if(typeof result === "object" && result !== null || typeof result === "function"){
+        return result
+    }else{
+        return obj
+    }
+}
+```
+
+#### 函数柯里化
+
+##### 递归实现
+
+```js
+function curry(fn,...args){
+    //函数参数个数
+    const fnLen = fn.length
+    return function(...innerArgs){
+        innerArgs = [...args,...innerArgs]
+        //未满足条件则继续递归
+        if(innerArgs.length<fnLen){
+            return curry.call(this,fn,...innerArgs)
+        }else{
+            fn.apply(this,innerArgs)
+        }
+    }
+}
+// 测试
+const add = curry((num1, num2, num3) => {
+  console.log(num1, num2, num3, num1 + num2 + num3)
+})
+
+add(1)(2)(3) // 1 2 3 6
+add(1, 2)(3) // 1 2 3 6
+add(1, 2, 3) // 1 2 3 6
+add(1)(2, 3) // 1 2 3 6
+```
+
+#### 实现多为数组扁平化
+
+##### 递归实现
+
+```js
+const myFlat = (array)=>{
+    return array.reduce((result,curr)=>{
+        return result.concat(Array.isArray(curr)? myFlat(curr): curr)
+    },[])
+}
+```
+
+##### 遍历实现
+
+```js
+const myFlat = (array)=>{
+    let result = []
+    let stack = [...array]
+    while(stack.length){
+        //每次取出数组最后一个元素进行验证
+        const val = stack.pop()
+        //是数组则展开再次插入数组
+        if(Array.isArray(val)){
+            stack.push(...val)
+        }else{
+            result.unshift(val) //将元素插入数组前面
+        }
+    }
+    return result
+}
+```
+
+#### 实现深拷贝
+
+##### `JSON`方法实现
+
+```js
+const deepClone = (target)=>{
+    return JSON.parse(JSON.stringify(target))
+}
+```
+
+##### 函数库`lodash`的`_.cloneDeep`方法
+
+```js
+var _ = require("lodash")
+ _.target(lodash)
+```
+
+##### 递归实现
+
+```js
+//简单实现
+const deepClone = (target)=>{
+    //判断传入的是对象还是数组
+    const result = target instanceof Array?[]:{}
+    for(const [key,val] of Object.entries(target)){//转换成数组
+        result[key] = typeof val === "object" ? deepClone(val) : val
+    }
+}
+```
+
+- 考虑传入值有循环引用问题
+
+```js
+//考虑存在循环引用问题
+const deepClone = (target,cache = new Map()) =>{
+    const isObject = (obj) => typeof obj === "object" && obj !== null
+    
+    if(isObject(target)){
+        //解决循环引用问题
+        const cacheTarget = cache.get(cache)
+        // 已经存在直接返回，无需再次解析
+		if(cacheTarget){
+            return cacheTarget
+        }
+        let cloneTarget = Array.isArray(target) ?[]:{}
+        cache.set(target,cloneTarget)
+        
+        for(const key in target){
+            if(target.hasOwnProperty(key)){
+                const val = target[key]
+                cloneTarget[key] = isObject(val) ? deepClone(val,cache) :val
+            }
+        }
+        return cloneTarget
+    }else{
+        return target
+    }
+}
+
+//测试
+const target = {
+  field1: 1,
+  field2: undefined,
+  field3: {
+      child: 'child'
+  },
+  field4: [2, 4, 8],
+  f: { f: { f: { f: { f: { f: { f: { f: { f: { f: { f: { f: {} } } } } } } } } } } },
+};
+
+target.target = target;
+
+const result1 = deepClone(target);
+console.log(result1)
+```
+
+#### 实现发布订阅（`EventEmitter`）
+
+- on：事件监听 
+-  emit: 发布事件  
+- off: 删除事件  
+- once : 只进行一次的事件订阅
+
+```js
+class EventEmitter {
+    constructor(){
+        this.events = {}
+    }
+    //事件监听
+    on(evt,callback,ctx){
+        //存在则push到数组里面，不存在则新建一个
+        this.events[evt] ? this.events[evt].push(callback) : this.events[evt] = [callback]
+        return this
+    }
+    //发布事件
+    emit(evt,...playload){
+        const callbacks = this.events[evt]
+        if(callbacks){
+            callbacks.forEach((cb) => cb.apply(this,playload))
+        }
+        return this
+    }
+    //删除事件,evt：指定事件，callback：evt指定函数；两者都是不传值则删除全部
+    off(evt,callback){
+        if(typeof evt === "undefind"){
+            delete this.events
+        }else if(typeof evt ==="string"){
+            if(typeof callback === "function"){
+                this.events[evt] = this.events[evt].filter(cb => cb !== callback)
+            }else{
+               delete this.events[evt]
+            }
+        }
+        return this
+    }
+    //只进行一次的事件订阅
+    once(evt,callback,ctx){
+        const proxyCallback = (...playload)=>{
+            callback.apply(ctx,payload)
+            //回调函数执行之后就删除事件订阅
+            this.off(evt,proxyCallback)
+        }
+        this.on(evt,proxyCallback,ctx)
+    }
+}
+
+// 测试
+const e1 = new EventEmitter()
+
+const e1Callback1 = (name, sex) => {
+  console.log(name, sex, 'evt1---callback1')
+}
+const e1Callback2 = (name, sex) => {
+  console.log(name, sex, 'evt1---callback2')
+}
+const e1Callback3 = (name, sex) => {
+  console.log(name, sex, 'evt1---callback3')
+}
+
+e1.on('evt1', e1Callback1)
+e1.on('evt1', e1Callback2)
+// 只执行一次回调
+e1.once('evt1', e1Callback3)
+
+e1.emit('evt1', 'blankzro', 'boy')
+// blankzro boy evt1---callback1
+// blankzro boy evt1---callback2
+// blankzro boy evt1---callback3
+console.log('------尝试删除e1Callback1------')
+// 移除e1Callback1
+e1.off('evt1', e1Callback1)
+e1.emit('evt1', 'blankzro', 'boy')
+// blankzro boy evt1---callback2
+
+```
+
+### 实现原生ajax请求
+
+```js
+const ajax = {
+    get(url,fn){
+        const xhr = new 
+    }
+} 
+```
+
+
+
+
 
