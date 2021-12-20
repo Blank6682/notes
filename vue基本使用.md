@@ -600,7 +600,7 @@ hash 的特点
 
 js:
 
-布局判断元素位置方法：getBoundigClientrRect ，**IntersectionObserver**
+布局判断元素位置方法：getBoundingClientRect，**IntersectionObserver**
 
 promise 調度器
 
