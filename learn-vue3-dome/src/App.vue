@@ -14,6 +14,7 @@
     <VModelDemo />
     <Watch />
     <GetInstance />
+    <Cart />
   </div>
 </template>
 
@@ -29,6 +30,7 @@ import ProxyObserber from "./components/ProxyObserver/index.vue";
 import VModelDemo from "./components/VModelDemo/index.vue";
 import Watch from "./components/Watch.vue";
 import GetInstance from "./components/GetInstance.vue";
+import Cart from "./components/Cart/index.vue";
 
 //生命周期函数
 import LifeCycles from "./components/LifeCycles.vue";

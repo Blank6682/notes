@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HTML多媒体</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <!-- 1.audio 播放音乐或音频。IE9以下的版本不支持
          a)支持的格式
             .mp3/.ogg/.wav
@@ -19,7 +18,7 @@
             muted:静音
             preload:预加载（当使用autoplay时，preload自动失效）
     -->
-    <audio src="music/再也没有.mp3" controls autoplay="true"></audio><br>
+    <audio src="music/再也没有.mp3" controls autoplay="true"></audio><br />
 
     <!-- 2.video   加载视频。IE9以下的版本不支持。
         a)支持的格式
@@ -34,37 +33,46 @@
             width:宽度
             height:高度
             poster:海报 -->
-    <video src="./video/可爱小鸡.mp4" controls width="600" height="400" poster="./video/preview.jpg"  autoplay></video><br>
+    <video
+      src="./video/可爱小鸡.mp4"
+      controls
+      width="600"
+      height="400"
+      poster="./video/preview.jpg"
+      autoplay
+    ></video
+    ><br />
     <!-- 3.embed   嵌入内容或加载插件。
         属性:
             src:文件路径
             width:宽度
             height:高度
             type:类型 -->
-    <embed src="music/过客.mp3" type="audio/mp3"><br>
-    <embed src="./video/可爱小鸡.mp4" type="video/mp4"  width="600" height="400"><br>
+    <embed src="music/过客.mp3" type="audio/mp3" /><br />
+    <embed src="./video/可爱小鸡.mp4" type="video/mp4" width="600" height="400" /><br />
     <!-- 4.canvas   画布,是一个容器元素。
         注意：
             a.单独使用canvas没有什么意义，它必须结合Javascript使用。它的具体功能体现是通过Javascript体现现来的。
             b.canvas的宽高最好不要通过css实现，而是直接使用标签属性width和height实现 -->
-    <canvas id="myCanvas" width="200" height="100" style="border: 1px solid #000;"></canvas>
+    <canvas id="myCanvas" width="200" height="100" style="border: 1px solid #000"></canvas>
     <script type="text/javascript">
-        var canvas = document.getElementById("myCanvas")[0];
-        var ctx = canvas.getContext("2d");
-        // 绘制2D图
-        ctx.fillStyle = "#ff0000";
-        // 设置填充色
-        ctx.fillRect(0, 0, 200, 100);
+      var canvas = document.getElementById("myCanvas")[0];
+      var ctx = canvas.getContext("2d");
+      // 绘制2D图
+      ctx.fillStyle = "#ff0000";
+      // 设置填充色
+      ctx.fillRect(0, 0, 200, 100);
     </script>
-    　 <script lang="javascript"> 
+    　
+    <script lang="javascript">
 
-        　 function loopy(){ 
-        　　 var sWord =""; 
-        　　 while(sWord!="login"){sWord=prompt("请输入你的登陆密码");} 
-        　　 alert("登陆成功！"); 
-        　 } 
-        　 loopy() 
-        　 </script> 
-</body>
-
+      　 function loopy(){
+      　　 var sWord ="";
+      　　 while(sWord!="login"){sWord=prompt("请输入你的登陆密码");}
+      　　 alert("登陆成功！");
+      　 }
+      　 loopy()
+      　
+    </script>
+  </body>
 </html>
