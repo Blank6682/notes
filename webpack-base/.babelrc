@@ -1,0 +1,8 @@
+{
+    //预设：Babel插件集合
+    // "presets": ["@babel/preset-env"],
+    // "plugins": [
+    //     // 兼容async/await的语法，需要regenratorRuntime插件支持，安装@babel/runtime和@babel/plugin-transform-runtime"
+    //     "@babel/plugin-transform-runtime"
+    // ]
+}
