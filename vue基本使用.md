@@ -80,20 +80,20 @@
   ```html
   <!-- 阻止单击事件继续传播 -->
   <a v-on:click.stop="doThis"></a>
-
+  
   <!-- 提交事件不再重载页面 -->
   <form v-on:submit.prevent="onSubmit"></form>
-
+  
   <!-- 修饰符可以串联 -->
   <a v-on:click.stop.prevent="doThat"></a>
-
+  
   <!-- 只有修饰符 -->
   <form v-on:submit.prevent></form>
-
+  
   <!-- 添加事件监听器时使用事件捕获模式 -->
   <!-- 即内部元素触发的事件先在此处理，然后才交由内部元素进行处理 -->
   <div v-on:click.capture="doThis">...</div>
-
+  
   <!-- 只当在 event.target 是当前元素自身时触发处理函数 -->
   <!-- 即事件不是从内部元素触发的 -->
   <div v-on:click.self="doThat">...</div>
@@ -205,7 +205,7 @@ export default {
        <solt name="footer">
       </solt>
   <div>
-
+  
   //父组件调用
   <ScopedSlot>
       //v-solt:name指定使用插槽
@@ -388,7 +388,7 @@ export default {
     function undateView() {
       console.log("视图更新了");
     }
-
+  
     //特殊处理数组，主要是利用了数组的原型
     //重新定义数组原型
     const oldArrayProperty = Array.prototype;
@@ -402,7 +402,7 @@ export default {
         //Array.property.push.call(this,...argments)
       };
     });
-
+  
     //重新定义属性，监听起来
     function defineReactive(target, key, value) {
       //深度监听
@@ -424,13 +424,13 @@ export default {
         },
       });
     }
-
+  
     //监听对象
     function observer(target) {
       if (typeof target !== "object" || target === null) {
         return target;
       }
-
+  
       if (Array.isArray(target)) {
         target.__proto__ = arrProto;
       }
@@ -470,7 +470,7 @@ export default {
       ...
     </ul>
   </div>
-
+  
   //js模拟
   <script>
     const vdom = {
@@ -592,20 +592,3 @@ hash 的特点
 - hash 变化不会刷新页面，SPA 必须的特点
 - hash 永远不会提交到 server 端（前端自生自灭）
 
-查漏：
-
-计算机网络基础
-
-从输入路由到浏览器渲染的过程，
-
-js:
-
-布局判断元素位置方法：getBoundingClientRect，**IntersectionObserver**
-
-promise 調度器
-
-大文件上傳出方案
-
-async await 实现原理
-
-vueX 持久化

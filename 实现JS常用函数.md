@@ -170,3 +170,21 @@ class MyPromise {
 ```
 
 ### 
+
+查漏：
+
+计算机网络基础
+
+从输入路由到浏览器渲染的过程，
+
+js:
+
+布局判断元素位置方法：getBoundingClientRect，**IntersectionObserver**
+
+promise 調度器
+
+大文件上傳出方案
+
+async await 实现原理
+
+vueX 持久化
