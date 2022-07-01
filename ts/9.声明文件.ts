@@ -3,4 +3,4 @@
 
 //npm install -save @types/jquery
 
-jQuery("foo")
+// jQuery("foo")

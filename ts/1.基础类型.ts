@@ -55,3 +55,8 @@ class BlankZro {
 
 type Bl = keyof BlankZro
 const BZ: Bl = 'name'
+
+type Name = string | number
+type BlankZr = boolean
+
+const B: Extract<BlankZro, Name>
