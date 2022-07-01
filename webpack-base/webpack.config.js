@@ -1,18 +1,17 @@
-
-const path = require('path');
-//自动生成html入口文件和引用js文件
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-//打包Css
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-//压缩Css
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-//webpack开箱即用的插件,压缩Js
-const TerserPlugin = require('terser-webpack-plugin');
-//开启PWA,渐进式网络程序，需要浏览器注册serviceWorker
-const WorkboxPlugin = require("workbox-webpack-plugin")
-//依赖图
+const path = require('path')
+// 自动生成html入口文件和引用js文件
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+// 打包Css
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+// 压缩Css
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+// webpack开箱即用的插件,压缩Js
+const TerserPlugin = require('terser-webpack-plugin')
+// 开启PWA,渐进式网络程序，需要浏览器注册serviceWorker
+// const WorkboxPlugin = require('workbox-webpack-plugin')
+// 依赖图
 // const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin
-const webpack = require("webpack")
+const webpack = require('webpack')
 
 module.exports = {
   mode: 'development',
@@ -62,7 +61,7 @@ module.exports = {
         include: path.join(__dirname, 'src'),
         exclude: /node_modules/,
         use: [
-          'cache-loader',
+          // 'cache-loader',
           'thread-loader',
           {
             loader: 'babel-loader',
@@ -70,23 +69,23 @@ module.exports = {
             options: {
               presets: [
                 ['@babel/preset-env',
-                  //配置polyfill兼容
+                  // 配置polyfill兼容
                   {
                     targets: [
                       '> 1%',
                       'last 1 version',
                     ],
                     useBuiltIns: 'usage',
-                    corejs: 3
-                  }
-                ]
+                    corejs: 3,
+                  },
+                ],
               ],
               plugins: [
                 // 兼容async/await的语法，需要regeneratorRuntime插件支持，安装@babel/runtime和@babel/plugin-transform-runtime"
                 '@babel/plugin-transform-runtime',
               ],
             },
-          },]
+          }],
       },
       // asset/resource 导出静态文件，即发送一个单独的文件并生成url
       {
@@ -118,35 +117,35 @@ module.exports = {
       //     }
       // },
       // css loader 注意顺序，从后往前
-      //Css模块。检测 .global.css文件
+      // Css模块。检测 .global.css文件
       {
-        test: new RegExp(`^(?!.*\\.global).*\\.(css|less)`),
+        test: new RegExp('^(?!.*\\.global).*\\.(css|less)'),
         exclude: /node_modules/,
         use: [
           MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
-            //开启，模块化处理Css类名，防止Css冲突，样式覆盖
+            // 开启，模块化处理Css类名，防止Css冲突，样式覆盖
             options: {
-              modules: true
-            }
+              modules: true,
+            },
           },
           'less-loader',
-          "postcss-loader",
+          'postcss-loader',
         ],
       },
       {
-        test: new RegExp(`^(.*\\.global).*\\.(css|less)`),
+        test: new RegExp('^(.*\\.global).*\\.(css|less)'),
         exclude: /node_modules/,
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
           'less-loader',
-          "postcss-loader",
+          'postcss-loader',
         ],
       },
-      //细粒度Shimming，一些遗留模块的依赖this,commonJs运行时,this指向是module.exprots,通过 imports-loader 覆盖this的指向
-      //在原始代码中已存在的 imports（import/require）与引入新值会导致失败。
+      // 细粒度Shimming，一些遗留模块的依赖this,commonJs运行时,this指向是module.exprots,通过 imports-loader 覆盖this的指向
+      // 在原始代码中已存在的 imports（import/require）与引入新值会导致失败。
       // {
       //     test: require.resolve("./src/index.js"),
       //     use: [{
@@ -157,19 +156,19 @@ module.exports = {
       //     }]
       // },
 
-      //exports-loader,一般用来导入一些外部模块，在不知道其内容在做什么样的导出时，即当源文件不包含 exports 或者有一些内容没有 export 时是有用的。可以借助exports-loader进行配置做一些内容的导出， 
+      // exports-loader,一般用来导入一些外部模块，在不知道其内容在做什么样的导出时，即当源文件不包含 exports 或者有一些内容没有 export 时是有用的。可以借助exports-loader进行配置做一些内容的导出，
       {
-        test: require.resolve("./src/globals.js"),
+        test: require.resolve('./src/globals.js'),
         use: [
           {
-            loader: "exports-loader",
+            loader: 'exports-loader',
             options: {
               type: 'commonjs',
-              exports: ["file", "multiple helpers.parse parse"]
-            }
-          }
-        ]
-      }
+              exports: ['file', 'multiple helpers.parse parse'],
+            },
+          },
+        ],
+      },
     ],
   },
   // dev server,（检测文件的变化实现热更新，实质是把打包文件放在了内存中）
@@ -219,7 +218,7 @@ module.exports = {
     liveReload: true,
 
     client: {
-      //关闭在浏览器上面显示错误
+      // 关闭在浏览器上面显示错误
       overlay: false,
     },
 
@@ -233,28 +232,28 @@ module.exports = {
   plugins: [
     // 自动生成html入口文件和引用js文件
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'src', 'index.html'),
+      template: path.join(__dirname, 'public', 'index.html'),
       filename: 'index.html',
     }),
     // 打包css
     new MiniCssExtractPlugin({
       filename: 'styles/[contenthash].css',
-      chunkFilename: 'styles/[contenthash].css'
+      chunkFilename: 'styles/[contenthash].css',
     }),
-    //依赖图
+    // 依赖图
     // new BundleAnalyzerPlugin(),
-    //添加workbox, 实现PWA,需要浏览器注册注册serviceWorker
+    // 添加workbox, 实现PWA,需要浏览器注册注册serviceWorker
     // new WorkboxPlugin.GenerateSW({
     //     // 这些选项帮助快速启用 ServiceWorkers
     //     clientsClaim: true,
     //     // 不允许遗留任何“旧的” ServiceWorkers
     //     skipWaiting: true,
     // }),
-    //shimming预置全局变量
+    // shimming预置全局变量
     new webpack.ProvidePlugin({
-      //告诉webpack如果遇到一个或者多个_ 就把lodash这个包引入进来
-      _: "lodash"
-    })
+      // 告诉webpack如果遇到一个或者多个_ 就把lodash这个包引入进来
+      _: 'lodash',
+    }),
   ],
 
   // 优化
@@ -285,23 +284,23 @@ module.exports = {
     hints: false,
   },
 
-  //配置模块如何解析
+  // 配置模块如何解析
   resolve: {
-    //创建 import 或 require 的别名
+    // 创建 import 或 require 的别名
     alias: {
-      "@": path.resolve(__dirname, "./src")
+      '@': path.resolve(__dirname, './src'),
     },
-    //解析文件的拓展名
-    extensions: ['.json', ".js", '.vue']
+    // 解析文件的拓展名
+    extensions: ['.json', '.js', '.vue'],
   },
 
-  //外部拓展,缩小打包体积，提高首屏加载速度，jQuery引入示例
-  externalsType: "script",
+  // 外部拓展,缩小打包体积，提高首屏加载速度，jQuery引入示例
+  externalsType: 'script',
   externals: {
     lodash: [
-      "https://cdn.jsdelivr.net/npm/lodash@4.17.19/lodash.min.js",
-      "_"
-    ]
-  }
-};
-//在package.json中添加sideEffects配置可以告诉webpack那些模块是不需要tree-shaking的，值为 true(所有的)/[]（指定模块）
+      'https://cdn.jsdelivr.net/npm/lodash@4.17.19/lodash.min.js',
+      '_',
+    ],
+  },
+}
+// 在package.json中添加sideEffects配置可以告诉webpack那些模块是不需要tree-shaking的，值为 true(所有的)/[]（指定模块）

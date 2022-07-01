@@ -1,10 +1,10 @@
-//动态模块导入测试
+// 动态模块导入测试
 function getComponent() {
-  return import("lodash")
+  return import('lodash')
     .then(({ default: _ }) => {
-      const element = document.createElement("div")
+      const element = document.createElement('div')
 
-      element.innerHTML = _.join(['hello', "webpack!"], " ")
+      element.innerHTML = _.join(['hello', 'webpack!'], ' ')
       return element
     })
 }

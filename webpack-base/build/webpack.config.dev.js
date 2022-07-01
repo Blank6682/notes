@@ -1,10 +1,10 @@
 // Common js语法
-const path = require("path");
-const StylelintWebpackPlugin = require("stylelint-webpack-plugin");
+const path = require('path')
+const StylelintWebpackPlugin = require('stylelint-webpack-plugin')
 // 利用webpack-merge进行对象深层合并
-const { merge } = require("webpack-merge");
-const webpack = require("webpack");
-const CommonConfig = require("./webpack.config.common");
+const { merge } = require('webpack-merge')
+const webpack = require('webpack')
+const CommonConfig = require('./webpack.config.common')
 
 module.exports = merge(CommonConfig, {
     mode: 'development',
@@ -60,4 +60,4 @@ module.exports = merge(CommonConfig, {
             overlay: false,
         },
     },
-});
+})
