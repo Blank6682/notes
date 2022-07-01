@@ -9,7 +9,9 @@
         "useBuiltIns": "usage",
         "corejs": 3
       }
-    ]
+    ],
+    // 支持vue中的jsx语法
+    "@vue/babel-preset-jsx"
   ],
   "plugins": [
     // 兼容async/await的语法，需要regenratorRuntime插件支持，安装@babel/runtime和@babel/plugin-transform-runtime"

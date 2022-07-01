@@ -1,6 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const { VueLoaderPlugin } = require('vue-loader')
 
 //获取在环境变量获取开发模式
 const DevMode = process.env.NODE_ENV !== "production"
@@ -107,6 +108,11 @@ module.exports = {
                         }
                     }
                 ]
+            },
+            //vue loder
+            {
+                test: /\.vue$/,
+                use: 'vue-loader',
             }
         ]
     },
@@ -125,6 +131,7 @@ module.exports = {
             chunkFilename: DevMode ? "styles/[id].css" : "styles/[id],[contenthash].css",
             ignoreOrder: true,
         }),
+        new VueLoaderPlugin()
     ],
 
     //配置模块如何解析
