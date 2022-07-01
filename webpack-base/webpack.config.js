@@ -58,32 +58,35 @@ module.exports = {
     rules: [
       // js资源
       {
-        test: /\.js$/,
+        test: /\.js|jsx$/,
         include: path.join(__dirname, 'src'),
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          // 预设：Babel插件集合,也可外部增加.babelrc文件配置
-          options: {
-            presets: [
-              ['@babel/preset-env',
-                //配置polyfill兼容
-                {
-                  targets: [
-                    '> 1%',
-                    'last 1 version',
-                  ],
-                  useBuiltIns: 'usage',
-                  corejs: 3
-                }
-              ]
-            ],
-            plugins: [
-              // 兼容async/await的语法，需要regeneratorRuntime插件支持，安装@babel/runtime和@babel/plugin-transform-runtime"
-              '@babel/plugin-transform-runtime',
-            ],
-          },
-        },
+        use: [
+          'cache-loader',
+          'thread-loader',
+          {
+            loader: 'babel-loader',
+            // 预设：Babel插件集合,也可外部增加.babelrc文件配置
+            options: {
+              presets: [
+                ['@babel/preset-env',
+                  //配置polyfill兼容
+                  {
+                    targets: [
+                      '> 1%',
+                      'last 1 version',
+                    ],
+                    useBuiltIns: 'usage',
+                    corejs: 3
+                  }
+                ]
+              ],
+              plugins: [
+                // 兼容async/await的语法，需要regeneratorRuntime插件支持，安装@babel/runtime和@babel/plugin-transform-runtime"
+                '@babel/plugin-transform-runtime',
+              ],
+            },
+          },]
       },
       // asset/resource 导出静态文件，即发送一个单独的文件并生成url
       {
@@ -236,6 +239,7 @@ module.exports = {
     // 打包css
     new MiniCssExtractPlugin({
       filename: 'styles/[contenthash].css',
+      chunkFilename: 'styles/[contenthash].css'
     }),
     //依赖图
     // new BundleAnalyzerPlugin(),
