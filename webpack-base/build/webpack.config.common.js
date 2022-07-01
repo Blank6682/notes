@@ -135,7 +135,6 @@ module.exports = {
             ignoreOrder: true,
         }),
         new VueLoaderPlugin(),
-        //打包进度条
         new ProgressBarPlugin({
             format: `build [:bar] ${chalk.green.bold(':percent')} (:elapsed seconds)`
         })

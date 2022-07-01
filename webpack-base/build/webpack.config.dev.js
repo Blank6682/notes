@@ -20,7 +20,16 @@ module.exports = merge(CommonConfig, {
 
     plugins: [
         //热更新插件
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.DefinePlugin({
+            process: {
+                env: {
+                    NODE_DEV: JSON.stringify('development'),
+                    // 这里可以定义你的环境变量
+                    // VUE_APP_URL: JSON.stringify('https://xxx.com')
+                }
+            }
+        })
     ],
     //dev server,（检测文件的变化实现热更新，实质是把打包文件放在了内存中）
     devServer: {

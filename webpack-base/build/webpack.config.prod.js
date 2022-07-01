@@ -4,6 +4,7 @@ const CompressionPlugin = require('compression-webpack-plugin')
 
 //利用webpack-merge进行对象深层合并
 const { merge } = require('webpack-merge')
+const webapck = require("webpack")
 
 const CommonConfig = require("./webpack.config.common")
 
@@ -28,6 +29,15 @@ module.exports = merge(CommonConfig, {
                 algorithm: 'gzip',
                 threshold: 10240,
                 minRatio: 0.8
+            }),
+            new webpack.DefinePlugin({
+                process: {
+                    env: {
+                        NODE_DEV: JSON.stringify('development'),
+                        // 这里可以定义你的环境变量
+                        // VUE_APP_URL: JSON.stringify('https://xxx.com')
+                    }
+                }
             })
         ],
 
