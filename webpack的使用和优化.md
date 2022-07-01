@@ -475,7 +475,9 @@ const CommonConfig = require("./webpack.config.common")
 
 module.exports = merge(base, {
   mode: 'development',
-    devServer: {
+  //在开发模式下追踪代码，
+ devtool: 'eval-cheap-module-source-map',
+ devServer: {
         //启动端口
         port: 8000,
         static: path.join(__dirname, "../dist"),
@@ -543,11 +545,11 @@ module.exports = merge(CommonConfig, {
 ```js
 //webpack.config.prod.js
 module.exports = merge(CommonConfig, {
-  devtool: 'eval-cheap-module-source-map'
+  devtool: 'nosources-source-map'
 })
 ```
 
-## 
+
 
 ## 构建进度条
 
@@ -633,7 +635,7 @@ module.exports = merge(CommonConfig, {
 一般来说只有开发环境才需要规范语法，安装一下这些包
 
 - `eslint`：Eslint的依赖包
-- `eslint-config-airbnb-base`：Eslint的现成方案
+- `eslint-config-airbnb-base`：Eslint的现成方案(或者使用antfu的)
 - `eslint-plugin-import`：支持Eslint拓展配置
 - `eslint-webpack-plugin`：将Eslint配置在webpack中的插件
 
@@ -1213,6 +1215,8 @@ node_modules
 # webpack优化
 
 ## 构建时间优化
+
+:star: 安装`loader`和`plugin`时要注意一下webpack的版本兼容问题，可以去对应的`loader/plugin`的库里面查看最新版本的`package.json`中的`peerDependencies` 项
 
 ### thread-loader
 
