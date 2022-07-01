@@ -569,20 +569,18 @@ function throttle(fn,dalay){
 1. 创建一个空的简单JavaScript对象（即` {} `）；
 2. 为步骤1新创建的对象添加属性 `proto` ，将该属性链接至构造函数的原型对象
 3. 将步骤1新创建的对象作为`this`的上下文,执行该函数 ；
-4. 如果该函数没有返回对象，则返回`this`。
+4. 如果该函数没有返回对象类型Object(包含Functoin, Array, Date, RegExg, Error等)，则返回`this`。
 
 ```js
 function myNew(fn,...args){
-    //1、2
+    //1、2 创建一个全新对象，并将其`__proto__`属性指向构造函数的`prototype`属性
     let obj = Object.create(fn.prototype)
-    //3
+    
+    //3 将构造函数调用的this指向这个新对象，并执行构造函数
     let result = fn.apply(obj,args)
-    //4
-    if(typeof result === "object" && result !== null || typeof result === "function"){
-        return result
-    }else{
-        return obj
-    }
+    
+    //4 如果构造函数返回对象类型Object，则正常返回，否则返回这个新的对象
+    return (result instanceof Object)? result :obj
 }
 ```
 
@@ -813,7 +811,114 @@ const ajax = {
 } 
 ```
 
+### :fire: 实现一个Promise
+
+```js
+class MyPromise {
+    constructor (exe){
+        //最后的值，Promise  .then接收的值/.catch 接收的值 
+        this.value = undefined
+        //状态：三种状态  pending success failure
+        this.status = "pending"
+        //成功的队列
+        this.successQueue = []
+        //失败的队列
+        this.failureQueue = []
+        //resolve
+        const resolve = (value) => {
+            const doResolve = ()=>{
+                //将缓存的队列挨个执行，并且将状态和值设置好
+                if(this.status === "pending"){
+                    this.status = "success"
+                    this.value = value
+                    
+                    while(this.successQueue.length){
+                        const cd = this.successQueue.shift()
+                        cb && cb(this.value)
+                    }
+                }
+            }
+            setTimeout(doResolve,0)
+        }
+        //reject
+        const reject = (value) =>{
+            const doReject = ()=>{
+                if(this.status ==="pending"){
+                    this.status = "failure"
+                    this.value = value
+                    
+                    while(this.failureQueue.length){
+                        const cd = this.failureQueue.shift()
+                        cd && cd(this.value)
+                    }
+                }
+            }
+            setTimeout(reject,0)
+        }
+      exe(resolve,reject)
+    }
+    
+    then(success = (value) =>value,failure = (value)=>value){
+        //.then  会返回一个新的promise
+        return new MyPromise((resolve,reject)=>{
+            //包装成功回调函数
+            const successFn = (value)=>{
+                try{
+					const result = success(value)
+                   	//如果值是一个promise,那么需要将这个promise的值继续往下传递，否则直接resolve即可
+                    result instanceof MyPromise ? result.then(resolve,reject) :resolve(result)
+                }catch(err){}
+                    reject(err)
+                }
+            }
+            //包装失败函数回调
+			const failureFn = (value) =>{
+            	try {
+                    const result = rejrct(value)
+                    
+                    result instanceof MyPrommise ?result.then(resolve,reject) : reject(result)
+                }catch(err){
+                    reject(err)
+                }
+        	}
+        	//如果Promise的状态还没结束，则将成功和失败的函数缓存到队列
+        	if(this,status ==="pending"){
+                this.successQueue.push(successFn)
+                this.successQueue.push(failureFn)
+                //如果已经成功，直接执行成功函数
+            }else if(this.status === "success"){
+                success(this.value)
+                //如果失败，直接执行失败函数
+            }else{
+                failure(this.value)
+            }
+            	
+        })
+    }
+    
+    catch(){
+        
+    }
+}
+```
 
 
 
+### 查漏：
+
+计算机网络基础
+
+从输入路由到浏览器渲染的过程，
+
+js:
+
+布局判断元素位置方法：getBoundingClientRect，**IntersectionObserver**
+
+promise 調度器
+
+大文件上傳出方案
+
+async await 实现原理
+
+vueX 持久化
 

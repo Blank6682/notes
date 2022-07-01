@@ -118,7 +118,7 @@ git bash的包管理器为`pacman`，用`pacman`可以安装各类linux的工具
 
    
 
-#### 七、配置命令快捷键
+### 七、配置命令快捷键
 
 Oh My Zsh自带, 把所有的git命令做了别名, 更快使用git命令.[全部别名地址](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git)
 
@@ -196,7 +196,7 @@ alias ......='cd ../../../../..'
     }
 ```
 
-打开git bash,依次键入命令行
+打开git bash,依次键入命令行，修改配置文件
 
 ```
 cd ~
@@ -220,6 +220,13 @@ alias nui='npm uninstall'
 alias nd='npm run dev'
 alias nb='npm run build'
 
+#yarn 
+
+alias y='yarn'
+alias ya='yarn add'
+alias yrm='yarn remove'
+alias yl='yarn list'
+alias yv='yarn -v'
 
 #git
 alias g='git'
