@@ -57,7 +57,7 @@ module.exports = {
             },
             //asset 在resource 和 inline 之中自动选择一个，默认是8KB,可通过paeser配置
             {
-                test: /\.(png|jpe?g|gif|svg|webp)$/,
+                test: /\.(png|jpe?g|gif|webp)$/,
                 type: 'asset',
                 parser: {
                     // 转base64的条件
@@ -68,7 +68,7 @@ module.exports = {
             },
             //css loader 注意顺序，从后往前
             {
-                test: /\.(le|sa|sc|c)ss$/,
+                test: /\.(sa|sc|c)ss$/,
                 use: [
                     {
                         loader: MiniCssExtractPlugin.loader,
@@ -138,10 +138,11 @@ module.exports = {
     resolve: {
         //创建 import 或 require 的别名,减少webpack解析的遍历加快构建速度
         alias: {
-            "@": path.resolve(__dirname, "./src")
+            "@": path.resolve(__dirname, "./src"),
+            assets: '~/assets'
         },
         //解析文件的拓展名
-        extensions: ['.json', ".js", '.vue', ".ts"]
+        extensions: ['.json', ".js", '.vue', ".ts", ".scss"]
     },
 }
 

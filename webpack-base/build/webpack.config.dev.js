@@ -17,6 +17,7 @@ module.exports = merge(CommonConfig, {
 
     //在开发模式下追踪代码，
     devtool: 'eval-cheap-module-source-map',
+
     plugins: [
         //热更新插件
         new webpack.HotModuleReplacementPlugin()
