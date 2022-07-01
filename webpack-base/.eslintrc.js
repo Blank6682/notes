@@ -9,6 +9,7 @@ module.exports = {
   },
   // 拓展规则
   extends: 'airbnb-base',
+  plugins: ['prettier'],
   // 自定义规则，会覆盖一部分拓展规则
   // 具体这些参数代表什么规则，可以去eslint官网看
   rules: {
@@ -20,6 +21,8 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'comma-danger': 'off',
     'no-useless-escape': 'off',
+    // prettier提示报错
+    'prettier/prettier': 'error',
   },
   // 语言风格
   parserOptions: {
