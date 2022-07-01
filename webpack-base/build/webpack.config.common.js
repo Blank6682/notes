@@ -3,6 +3,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const { VueLoaderPlugin } = require('vue-loader')
 
+const ProgressBarPlugin = require('progress-bar-webpack-plugin')
+const chalk = require('chalk')
+
 //获取在环境变量获取开发模式
 const DevMode = process.env.NODE_ENV !== "production"
 
@@ -131,7 +134,11 @@ module.exports = {
             chunkFilename: DevMode ? "styles/[id].css" : "styles/[id],[contenthash].css",
             ignoreOrder: true,
         }),
-        new VueLoaderPlugin()
+        new VueLoaderPlugin(),
+        //打包进度条
+        new ProgressBarPlugin({
+            format: `build [:bar] ${chalk.green.bold(':percent')} (:elapsed seconds)`
+        })
     ],
 
     //配置模块如何解析
