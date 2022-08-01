@@ -165,7 +165,7 @@ Array.prototype.tx_find= function(callback){
 - end：结束填充索引，默认length
 
 ```js
-Array.prototype.tx_find= function(initValue,start = 0,end){
+Array.prototype.tx_fill= function(initValue,start = 0,end){
     end = end || this.length
     for(let i =start;i< end;i++){
         this[i] = initValue
@@ -179,7 +179,7 @@ Array.prototype.tx_find= function(initValue,start = 0,end){
 是否包含
 
 - value：查询元素
-- start：开始填充索引，默认0
+- start：开始查询索引，默认0
 
 ```js
 Array.prototype.tx_includes= function(value,start = 0){
@@ -801,14 +801,59 @@ e1.emit('evt1', 'blankzro', 'boy')
 
 ```
 
-### 实现原生ajax请求
+#### 实现原生ajax请求
+
+- 创建XHLHttpRequest对象
+- 初始化参数
+- 发送请求
+- 接收请求判断
 
 ```js
-const ajax = {
-    get(url,fn){
-        const xhr = new 
+const ajax = (options)=> {
+    //创建XMLHttpRequest对象
+	const xhr = new XMLHttpRequest()
+    
+    //初始化参数
+    options = options || {}
+    options.type = (options.type || "GET").toUpperCase()
+    options.dataType = options.dataType || "json"
+    const params = options.data || null
+    
+    //发送请求
+    if(options.type === "GET"){
+        xhr.open("GET",options.url+'?'+params,true)
+        xhr,send(null)
+    }else if(options.type === "POST"){
+        xhr.open("POST",options.url,true)
+        xhr.send(params)
+    }
+    
+    //接收请求
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4){
+            let status = xhr.status
+            if(status >=200 && status<300){
+                options.success && options.success(xhr.responseText,xhr.responseXML)
+            }else{
+                options.fail && options.fail(status)
+            }
+        }
     }
 } 
+
+//使用如下
+ajax({
+    type:'post',
+    dataType:'json',
+    data:{},
+    url:'https://......',
+    success:(text,xml)=>{
+        console.log(text)
+    },
+    fail:(status){
+    console.log(status)
+}
+})
 ```
 
 ### :fire: 实现一个Promise
@@ -902,19 +947,30 @@ class MyPromise {
 }
 ```
 
+#### async await实现原理
+
+
+
+#### Promise调度器
+
+- 控制并发数量限制的异步任务调度器
+
+```js
+class Scheduler{
+    constructor(limit){
+        this.limit = limit;//最大并发数
+        this.count = 0;//当前并发数
+        this.queue = [];//阻塞队列
+    }
+    add(promiseCreator){
+        if(this.count > this.limit) this.start
+    }
+}
+```
+
 
 
 ### 查漏：
-
-计算机网络基础
-
-从输入路由到浏览器渲染的过程，
-
-js:
-
-布局判断元素位置方法：getBoundingClientRect，**IntersectionObserver**
-
-promise 調度器
 
 大文件上傳出方案
 

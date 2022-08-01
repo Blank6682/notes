@@ -1214,11 +1214,50 @@ node_modules
 
 # webpack优化
 
+## 优化分析
+
+### 分析打包速度
+
+需要安装`speed-measure-webpack-plugin`插件
+
+```
+npm i -D speed-measure-webpack-plugin
+```
+
+```js
+// 分析打包时间
+const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+const SMP = new SpeedMeasurePlugin();
+// ... 分析生产环境的的配置打包速度
+module.exports = SMP.wrap(prodWebpackConfig)
+
+```
+
+### 影响打包速度环节
+
+1.**搜索时间**
+
+> 开始打包，我们需要获取所有的依赖模块，需要占用一点的时间
+
+2.**解析时间**
+
+> 解析所有的依赖模块，由于 js 单线程的特性使得这些转换操作不能并发处理文件，而是需要一个个文件进行处理
+
+3.**压缩时间**
+
+> JS 压缩是发布编译的最后阶段，压缩 JS 需要先将代码解析成 AST 语法树，然后需要根据复杂的规则去分析和处理 AST，最后将 AST 还原成 JS，这个过程涉及到大量计算，因此比较耗时
+
+4.**二次打包**
+
+> 当更改项目中一个小小的文件时，重新打包时，所有的文件都要重新打包，需要花费同初次打包相同的时间，但项目中大部分文件都没有变更，尤其是第三方库。
+
 ## 构建时间优化
 
 :star: 安装`loader`和`plugin`时要注意一下webpack的版本兼容问题，可以去对应的`loader/plugin`的库里面查看最新版本的`package.json`中的`peerDependencies` 项
 
 ### thread-loader
+
+:warning: **注意：请仅在耗时的 loader 上使用。** **当项目较小时，多进程打包反而会使打包速度变慢。**
 
 开启多进程打包，可以大大提高构建的速度，使用方法是将`thread-loader`放在比较费时间的loader之前，比如`babel-loader`
 
@@ -1238,9 +1277,73 @@ npm i thread-loader -D
 }
 ```
 
+下面是`worker`池的优化:
+
+```js
+const  threadLoader = require('thread-loader');
+
+const jsWorkerPool = {
+  // options
+  // 产生的 worker 的数量，默认是 (cpu 核心数 - 1)
+  // 当 require('os').cpus() 是 undefined 时，则为 1
+  workers: 2,
+  
+  // 闲置时定时删除 worker 进程
+  // 默认为 500ms
+  // 可以设置为无穷大， 这样在监视模式(--watch)下可以保持 worker 持续存在
+  poolTimeout: 2000
+};
+
+const cssWorkerPool = {
+  // 一个 worker 进程中并行执行工作的数量
+  // 默认为 20
+  workerParallelJobs: 2,
+  poolTimeout: 2000
+};
+
+threadLoader.warmup(jsWorkerPool, ['babel-loader']);
+threadLoader.warmup(cssWorkerPool, ['css-loader', 'postcss-loader']);
+
+
+//...
+ 	{
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'thread-loader',
+            options: jsWorkerPool
+          },
+          'babel-loader'
+        ]
+      },
+      {
+        test: /\.s?css$/,
+        exclude: /node_modules/,
+        use: [
+          'style-loader',
+          {
+            loader: 'thread-loader',
+            options: cssWorkerPool
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              localIdentName: '[name]__[local]--[hash:base64:5]',
+              importLoaders: 1
+            }
+          },
+          'postcss-loader'
+        ]
+      }
+```
+
 
 
 ### cache-loader
+
+**⚠️ 请注意，保存和读取这些缓存文件会有一些时间开销，所以请只对性能开销较大的 loader 使用此 loader。**
 
 缓存资源，提高二次构建的速度，使用方法是将`cache-loader`放在比较费时间的loader之前，比如`babel-loader`
 
@@ -1335,7 +1438,7 @@ webpack会自动开启开箱即用的`terser-webpack-plugin`插件，由于开�
 ```js
 // webpack.confing.prod.js
 
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 
   optimization: {
     minimizer: [
