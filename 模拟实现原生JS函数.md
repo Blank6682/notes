@@ -372,7 +372,7 @@ Object.prototype.tx_values = function(obj){
 
 ```js
 const myInstanceOf = (obj,fn)=>{
-    if(obj === null && typeof obj !== "obj"){
+    if(obj === null && typeof obj !== "object"){
         return false
     }
     const proto = Object.getPrototypeOf(obj)
@@ -519,7 +519,7 @@ function debounce(fn,deday) {
     return function(...args){
         timer && clearTimeout(timer)
 
-        timer = seeTimeout(()=>{
+        timer = setTimeout(()=>{
             fn.apply(this,args)
         },delay)
     }
@@ -536,11 +536,11 @@ function debounce(fn,deday) {
 function throttle(fn,delay){
     let startTime = Date.now()
     return function (...args){
-        let lastTime = Date.now
+        let lastTime = Date.now()
         
         if(lastTime - startTime >delay){
             fn.apply(this,args)
-            startTime = Date.now
+            startTime = Date.now()
         }
     }
 }
@@ -949,7 +949,17 @@ class MyPromise {
 
 #### async await实现原理
 
+- 原理：其实就是一种语法糖，基于`promise`实现，返回值是一个`promise`对象
+- 调用`async`会返回一个`Promise`对象
+- `async`中可能有`await`表达式，其会使`async`暂停，直到表达式中的Promise解析完成后继续执行 async 中 await 后面的代码并返回解决结果。
+- 返回的是Promise 对象，所以在最外层不能直接获取其返回值，那么肯定可以用原来的方式：then() 链来处理这个 Promise 对象
 
+#### async await 和 promise 的区别
+
+- async/await 出现的异常是无法捕获的，需要借助 try/catch 来捕获异常
+- 任何一个await后面的promise对象变为reject，那么整个async都会被中断
+- 使用 async await 的话，catch 能处理 JSON.parse 错误
+  
 
 #### Promise调度器
 
@@ -960,12 +970,44 @@ class Scheduler{
     constructor(limit){
         this.limit = limit;//最大并发数
         this.count = 0;//当前并发数
-        this.queue = [];//阻塞队列
+        this.pending = [];//记录promise的数组
     }
+    
     add(promiseCreator){
-        if(this.count > this.limit) this.start
+        this.pending.push(promiseCreator)
+        this.run()
+    }
+    
+    run(){
+        // 假设pending为空，或者调用大于限制直接返回
+        if(!this.pending.length || this.count >= this.limit) return
+
+        this.count++
+        this.pending.shift()().finally(()=>{
+            this.count--
+            //轮询
+            this.run()
+        })
     }
 }
+
+//例子
+const timeout = time => new Promise(resolve => {
+  setTimeout(resolve, time);
+})
+  
+const scheduler = new Scheduler();
+  
+const addTask = (time,order) => {
+  scheduler.add(() => timeout(time).then(()=>console.log(order)))
+}
+
+addTask(1000, '1');
+addTask(500, '2');
+addTask(300, '3');
+addTask(400, '4');
+
+// output: 2 3 1 4
 ```
 
 
@@ -974,7 +1016,7 @@ class Scheduler{
 
 大文件上傳出方案
 
-async await 实现原理
+
 
 vueX 持久化
 
