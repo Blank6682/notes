@@ -11,12 +11,25 @@ npm init vue@3
 根据需求选择即可选择即可
 
 ```
-cd world-time
+cd /dome-name/
 git init
-yarn 
+npm i 
 ```
 
-### 配置Vite
+配置Vue
+
+```ts
+export default defineConfig({
+  plugins: [
+    vue({
+      reactivityTransform: true,//开启$ref
+    })]
+})
+```
+
+
+
+### 配置自动导入
 
 - 自动导入配置
 
@@ -35,13 +48,15 @@ export default defineConfig({
 		...
     Components(),
     AutoImport({
-      imports: ['vue'],
+      imports: ['vue','vue/macros','@vueuse/core'],//使用vueuse则加上
+      dirs: ['./src/utils'],
+      vueTemplate: true,
     }),
   ],
 })
 ```
 
-- 配置unocss
+### 配置unocss
 
 ```
 yarn add -D unocss
@@ -68,13 +83,20 @@ export default defineConfig({
 })
 ```
 
-- 配置iconify， 在[iconnes]( https://icones.js.org/)上面找到你需要的icon集合,
+```ts
+//main.ts
+import 'uno.css'
+```
+
+### 配置iconify
+
+在[iconnes]( https://icones.js.org/)上面找到你需要的icon集合,
 
 ```
 // @iconify-json/[the-collection-you-want]  
 //ex: @iconify-json/carbon
-yarn add -D @iconify-json/carbon
-yarn add @unocss/reset
+npm i -D @iconify-json/carbon
+npm i  @unocss/reset
 ```
 
 ```typescript
@@ -88,7 +110,9 @@ import '@unocss/reset/tailwind.css'
 <span i-carbon:bat><span>
 ```
 
-- 配置Eslint
+### 
+
+### 配置Eslint
 
 ```
 //这里使用的是antfu的eslint配置
@@ -100,5 +124,33 @@ yarn add -D eslint @antfu/eslint-config
 {
   "extends": "@antfu"
 }
+```
+
+### 问题
+
+找不到App.vue模块的解决方法
+
+在src文件下新增文件`env.d.ts`
+
+```ts
+/// <reference types="vite/client" />
+
+declare module '*.vue' {
+  import type { DefineComponent } from 'vue'
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/ban-types
+  const component: DefineComponent<{}, {}, any>
+  export default component
+}
+```
+
+### git提交问题
+
+#### `remote: Repository not found.`
+
+解决：在 gitbash 中输入
+
+```
+
+ git remote set-url origin git@github.com:[账号]/[仓库名].git
 ```
 
