@@ -59,4 +59,4 @@ const BZ: Bl = 'name'
 type Name = string | number
 type BlankZr = boolean
 
-const B: Extract<BlankZro, Name>
+let B: Extract<BlankZro, Name>
