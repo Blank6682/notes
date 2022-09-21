@@ -34,7 +34,7 @@ export default defineConfig({
 - 自动导入配置
 
 ```
-yarn add -D unplugin-vue-components unplugin-auto-import 
+npm i -D unplugin-vue-components unplugin-auto-import 
 ```
 
 ```typescript
@@ -54,12 +54,20 @@ export default defineConfig({
     }),
   ],
 })
+
+//组件自动导入在tsconfig.json增加
+{
+  "compilerOptions":{
+        //......
+      "jsx":"preserve"
+    }
+}
 ```
 
 ### 配置unocss
 
 ```
-yarn add -D unocss
+npm i -D unocss
 ```
 
 ```typescript
@@ -96,7 +104,7 @@ import 'uno.css'
 // @iconify-json/[the-collection-you-want]  
 //ex: @iconify-json/carbon
 npm i -D @iconify-json/carbon
-npm i  @unocss/reset
+npm i -D @unocss/reset
 ```
 
 ```typescript
@@ -115,8 +123,7 @@ import '@unocss/reset/tailwind.css'
 ### 配置Eslint
 
 ```
-//这里使用的是antfu的eslint配置
-yarn add -D eslint @antfu/eslint-config
+npm i -D eslint @antfu/eslint-config
 ```
 
 ```json
@@ -124,11 +131,18 @@ yarn add -D eslint @antfu/eslint-config
 {
   "extends": "@antfu"
 }
+//tsconfig.json
+{
+  "compilerOptions": {
+     //......
+    "skipLibCheck": true
+  }
+}
 ```
 
 ### 问题
 
-找不到App.vue模块的解决方法
+#### 找不到App.vue模块的解决方法
 
 在src文件下新增文件`env.d.ts`
 
@@ -143,9 +157,9 @@ declare module '*.vue' {
 }
 ```
 
-### git提交问题
+#### git提交问题
 
-#### `remote: Repository not found.`
+**`remote: Repository not found.`**
 
 解决：在 gitbash 中输入
 
@@ -153,4 +167,21 @@ declare module '*.vue' {
 
  git remote set-url origin git@github.com:[账号]/[仓库名].git
 ```
+
+#### 找不到名称“$ref” or ''$computed''.....
+
+**ts.config.json文件引入声明文件: include中引入auto-imports.d.ts**
+
+```json
+{
+    "include":[
+        //......
+        'auto-imports.d.ts'
+    ]
+}
+```
+
+
+
+
 
