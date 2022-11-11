@@ -107,6 +107,103 @@
 
 
 
+## 动画的实现
+
+### transform + translate + transition
+
+```css
+.box{
+   height: 50px;
+   transition: transform 1s ease-in-out 0.1s;
+}
+.box:hover{
+    transform:translateY(10px)
+}
+```
+
+### animation + keyframes
+
+```css
+.box {
+    width: 200px;
+    height: 50px;
+    animation: mymove 1s ease-in-out 0.1s 1 normal forwards paused;
+}
+@keyframes mymove {
+    from {
+        transform:none;
+    }
+    to { 
+        transform:translateY(100px)
+    }
+}
+```
+
+### `requestAnimationFrame`
+
+```html
+  <div class="box">我是容器</div>
+  <button>动起来！</button>
+```
+
+```css
+.box {
+    width: 200px;
+    height: 50px;
+}
+```
+
+```js
+
+
+const box = document.querySelector('.box');
+
+function mymove(number) {
+    if (number <= 100) {
+        box.style.marginLeft = number + 1 + 'px'; //每一帧向右移动1px
+        requestAnimationFrame(() => mymove(number + 1));
+    }
+}
+
+document.querySelector('button').onclick = function() {
+    requestAnimationFrame(() => mymove(0));
+};
+```
+
+### `el.animate()`
+
+```html
+  <div class="box">我是容器</div>
+  <button>动起来！</button>
+```
+
+```js
+    const box = document.querySelector('.box');
+
+    var keyframes = [
+      { 
+        marginLeft: '0'
+      },
+      { 
+        marginLeft: '100px'
+      }
+    ];
+
+    document.querySelector('button').onclick = function() {
+      box.animate(keyframes, {
+        iterations: 1,
+        iterationStart: 0,
+        delay: 0,
+        endDelay: 0,
+        duration: 1000,
+        fill: 'forwards',
+        easing: 'ease-out',
+      });
+    };
+```
+
+
+
 
 
 ## 开发的技巧
@@ -188,8 +285,6 @@ module.export={
     }
 }
 ```
-
-
 
 
 
